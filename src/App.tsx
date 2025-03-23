@@ -1,7 +1,7 @@
 function App() {
 
   return (
-    <div>App</div>
+    <div className="bg-action-next/10">App</div>
   )
 }
 

@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+@custom-variant light (&:where(.light, .light *));
+
+
+@theme {
+    --color-primary: #776EE8;
+    --color-primary-content: #FFFFFF;
+    --color-secondary: #D239FF;
+    --color-secondary-content: #FFFFFF;
+    --color-neutral: #FFFFFF;
+    --color-neutral-content: #FFFFFF;
+    --color-base100: #1D1D21;
+    --color-base200: #1B1B1B;
+    --color-base300: #181818;
+    --color-base-content: #FFFFFF;
+    --color-action-overview: #00CA07;
+    --color-action-overview-content: #FFFFFF;
+    --color-action-next: #00B2FF;
+    --color-action-next-content: #FFFFFF;
+    --color-action-prev: #23465D;
+    --color-action-prev-content: #FFFFFF;
+}
+
+@layer base {
+    @variant light {
+        --color-teste: #8e0d7a;
+    }
+}
