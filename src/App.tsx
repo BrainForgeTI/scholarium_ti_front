@@ -1,8 +1,8 @@
-function App() {
+import { RouterProvider } from "react-router"
+import { router } from "./routes"
 
-  return (
-    <div className="bg-action-next/10">App</div>
-  )
+function App() {
+  return <RouterProvider router={router} />
 }
 
 export default App
