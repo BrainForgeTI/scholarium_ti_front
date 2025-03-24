@@ -1,7 +1,9 @@
+import { PageLayout } from "../../components/PageLayout/PageLayout"
+
 export const HomePage = () => {
     return (
-        <div>
-            home
-        </div>
+        <PageLayout>
+            <div>oi</div>
+        </PageLayout>
     )
 }
