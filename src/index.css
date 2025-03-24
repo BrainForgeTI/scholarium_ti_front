@@ -30,3 +30,24 @@
         --color-teste: #8e0d7a;
     }
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f116;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ffffff28;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
