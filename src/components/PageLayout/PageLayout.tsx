@@ -12,8 +12,11 @@ const PageLayout = (props: Props) => {
             <div className="h-full">
                 <SideMenu />
             </div>
-            <div className="w-full">
-                <LayoutHeader />
+            <div className="relative w-full flex flex-col">
+                <div className="w-full absolute">
+                    <LayoutHeader />
+                </div>
+                <div className="h-[63px]"></div>
                 <MainContent>
                     {props.children}
                 </MainContent>

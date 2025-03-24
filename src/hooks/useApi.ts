@@ -32,7 +32,7 @@ export const useApi = () => ({
                 progress: 57
             },
             {
-                id: 'idno2hr83h43',
+                id: 'idno22424hr83h43',
                 imageUrl: 'https://seeklogo.com/images/J/Java-logo-6BBEB11CBA-seeklogo.com.png',
                 title: 'Aventura de Java',
                 colorFrom: '#86B8B9',
@@ -45,7 +45,7 @@ export const useApi = () => ({
                 progress: 57
             },
             {
-                id: 'idno2hr83h43',
+                id: 'id2323no2hr83h43',
                 imageUrl: 'https://seeklogo.com/images/J/Java-logo-6BBEB11CBA-seeklogo.com.png',
                 title: 'Aventura de Java',
                 colorFrom: '#86B8B9',
@@ -58,7 +58,7 @@ export const useApi = () => ({
                 progress: 57
             },
             {
-                id: 'idno2hr83h43',
+                id: 'idno2hr84553h43',
                 imageUrl: 'https://seeklogo.com/images/J/Java-logo-6BBEB11CBA-seeklogo.com.png',
                 title: 'Aventura de Java',
                 colorFrom: '#86B8B9',

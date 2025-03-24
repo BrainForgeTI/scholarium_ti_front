@@ -3,7 +3,7 @@ import GoldImg from '../../../assets/images/gold.png';
 
 const LayoutHeader = () => {
     return (
-        <div className="h-[60px] w-full bg-neutral/6 border-b border-neutral/20 ">
+        <div className="h-[60px] w-full bg-neutral/6 border-b border-neutral/20">
             <div className='w-full h-full flex justify-end px-8'>
                 <ul className='flex items-center gap-10'>
                     <li className='flex items-center gap-4'>
