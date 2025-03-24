@@ -24,7 +24,7 @@ export const HomePage = () => {
             <>
                 <PageTitle title="Minhas Aventuras" />
                 <div className="w-full">
-                    <ul className="pt-10 flex flex-wrap justify-around gap-15">
+                    <ul className="pt-10 flex flex-wrap justify-center gap-15">
                         {adventures.map((adventure) => {
                             return (
                                 <li key={adventure.id}>
