@@ -1,5 +1,5 @@
 import { JSX } from "react"
-import { SideMenu } from "../SideMenu/SideMenu";
+import { SideMenu } from "../SideMenu";
 
 interface Props {
     children: JSX.Element;
@@ -7,7 +7,7 @@ interface Props {
 
 export const PageLayout = (props: Props) => {
     return (
-        <div className="w-screen h-screen">
+        <div className="w-screen h-screen font-poppins">
             <SideMenu />
         </div>
     )
