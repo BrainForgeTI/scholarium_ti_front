@@ -3,6 +3,7 @@ import { AdventureCard } from "../../components/AdventureCard";
 import { useEffect, useState } from "react";
 import { AdventureCardType } from "../../types/AdventureCardType";
 import { useApi } from "../../hooks/useApi";
+import { NewAdventureCard } from "../../components/NewAdventureCard";
 
 export const HomePage = () => {
     const api = useApi();
@@ -31,6 +32,10 @@ export const HomePage = () => {
                                 </li>
                             )
                         })}
+
+                        <li key={'newadventurecard'}>
+                            <NewAdventureCard />
+                        </li>
                     </ul>
                 </div>
             </>
