@@ -1,6 +1,6 @@
 import { JSX } from "react"
 import { SideMenu } from "../SideMenu";
-import { LayoutHeader } from "../PageLayout";
+import { LayoutHeader, MainContent } from "../PageLayout";
 
 interface Props {
     children: JSX.Element;
@@ -12,7 +12,12 @@ const PageLayout = (props: Props) => {
             <div className="h-full">
                 <SideMenu />
             </div>
-            <LayoutHeader />
+            <div className="w-full">
+                <LayoutHeader />
+                <MainContent>
+                    {props.children}
+                </MainContent>
+            </div>
         </div>
     )
 }
