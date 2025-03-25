@@ -24,7 +24,7 @@ export const HomePage = () => {
             <>
                 <PageTitle title="Minhas Aventuras" />
                 <div className="w-full">
-                    <ul className="w-full pt-10 grid grid-cols-5 gap-15">
+                    <ul className="w-full pt-10 grid grid-cols-4 gap-30">
                         {adventures.map((adventure) => {
                             return (
                                 <li key={adventure.id} className="w-full">

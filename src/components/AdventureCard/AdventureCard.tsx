@@ -15,7 +15,7 @@ const AdventureCard = (props: Props) => {
     }, [])
 
     return (
-        <div className="relative min-w-[306px] min-h-[474px] bg-base300 rounded-[20px] p-3 flex flex-col items-center">
+        <div className="relative min-w-[306px] min-h-[474px] bg-base300 rounded-[20px] p-3 pb-10 flex flex-col items-center">
             <button className='cursor-pointer absolute text-base-content/34 w-[21px] h-[21px] bg-base300/74 rounded-[5px] flex justify-center items-center right-[30px] top-[20px]'>
                 <EditIcon />
             </button>
