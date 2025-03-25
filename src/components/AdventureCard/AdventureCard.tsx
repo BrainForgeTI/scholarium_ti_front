@@ -15,12 +15,12 @@ const AdventureCard = (props: Props) => {
     }, [])
 
     return (
-        <div className="relative w-[306px] min-h-[474px] bg-base300 rounded-[20px] p-3 flex flex-col items-center">
+        <div className="relative min-w-[306px] min-h-[474px] bg-base300 rounded-[20px] p-3 flex flex-col items-center">
             <button className='cursor-pointer absolute text-base-content/34 w-[21px] h-[21px] bg-base300/74 rounded-[5px] flex justify-center items-center right-[30px] top-[20px]'>
                 <EditIcon />
             </button>
 
-            <svg width="281" height="217" viewBox="0 0 281 217" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* <svg width="281" height="217" viewBox="0 0 281 217" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 20C0 8.95428 8.9543 0 20 0H261C272.046 0 281 8.95431 281 20V170.347C281 173.063 280.445 175.83 279.259 178.273C242.899 253.158 136.273 200.433 16.714 177.454C7.09941 175.606 0 167.281 0 157.49V20Z" fill={`url(#paint0_linear_143_284_${props.adventure.id})`} />
                 <defs>
                     <linearGradient id={`paint0_linear_143_284_${props.adventure.id}`} x1="6.5" y1="171.5" x2="276" y2="4.5" gradientUnits="userSpaceOnUse">
@@ -34,7 +34,13 @@ const AdventureCard = (props: Props) => {
                         <span className={`font-bold pt-5`} style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>{props.adventure.title}</span>
                     </div>
                 </foreignObject>
-            </svg>
+            </svg> */}
+            <div className='w-full h-[217px] rounded-b-[20px] rounded-t-[20px]' style={{ backgroundImage: `linear-gradient(to right, ${props.adventure.colorFrom}, ${props.adventure.colorTo})` }}>
+                <div className="w-full h-full flex flex-col items-center justify-center">
+                    <div className='w-[80px] h-[80px] bg-cover bg-center rounded-[10px]' style={{ backgroundImage: `url("${props.adventure.imageUrl}")` }}></div>
+                    <span className={`font-bold pt-5`} style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>{props.adventure.title}</span>
+                </div>
+            </div>
 
             <div className='w-[90px] h-[90px] mt-2 flex justify-center items-center'>
                 <img src={props.adventure.character.imageUrl}></img>

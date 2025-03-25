@@ -24,16 +24,16 @@ export const HomePage = () => {
             <>
                 <PageTitle title="Minhas Aventuras" />
                 <div className="w-full">
-                    <ul className="pt-10 flex flex-wrap justify-center gap-15">
+                    <ul className="w-full pt-10 grid grid-cols-5 gap-15">
                         {adventures.map((adventure) => {
                             return (
-                                <li key={adventure.id}>
+                                <li key={adventure.id} className="w-full">
                                     <AdventureCard adventure={adventure} />
                                 </li>
                             )
                         })}
 
-                        <li key={'newadventurecard'}>
+                        <li key={'newadventurecard'} className="w-full">
                             <NewAdventureCard />
                         </li>
                     </ul>

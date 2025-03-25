@@ -1,7 +1,7 @@
 import { Character } from "./CharacterType"
 
 export type AdventureCardType = {
-    id: string
+    id?: string
     imageUrl: string
     colorFrom: string
     colorTo: string
