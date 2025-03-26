@@ -149,14 +149,14 @@ const AdventureCard = (props: Props) => {
                             <label htmlFor='addingnewadventureinput1' className='w-[30px] h-[30px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorFrom }}>
                                 <EditIcon />
                             </label>
-                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorFrom') }} id='addingnewadventureinput1' type='color' className='invisible h-0' />
+                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorFrom') }} id='addingnewadventureinput1' type='color' className='opacity-0' />
                         </div>
 
                         <div>
                             <label htmlFor='addingnewadventureinput2' className='w-[30px] h-[30px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorTo }}>
                                 <EditIcon />
                             </label>
-                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorTo') }} id='addingnewadventureinput2' type='color' className='invisible h-0' />
+                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorTo') }} id='addingnewadventureinput2' type='color' className='visible opacity-0' />
                         </div>
                     </div>
                     :
