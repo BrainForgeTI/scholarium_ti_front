@@ -42,9 +42,9 @@ export const HomePage = () => {
         <PageLayout>
             <>
                 <PageTitle title="Minhas Aventuras" />
-                <div className="w-full">
-                    <div className="p-8 rounded-[20px] border py-20 border-base-content/10">
-                        <ul className="w-full flex flex-wrap justify-center gap-30">
+                <div className="w-full mt-10">
+                    <div className="p-8 rounded-[20px] border p-8 border-base-content/10">
+                        <ul className="md:gap-30 w-full flex flex-wrap justify-center gap-10">
                             {adventures.map((adventure) => {
                                 return (
                                     <li key={adventure.id} className="">

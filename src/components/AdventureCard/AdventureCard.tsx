@@ -43,8 +43,8 @@ const AdventureCard = (props: Props) => {
 
     return (
         <div className='flex gap-5'>
-            <div className='relative w-[306px] h-[474px] bg-base300 rounded-[20px] p-3 pb-10 flex flex-col items-center justify-between'>
-                <button onClick={() => { props.addingNewAdventure ? props.cancelAddNewAdventure!() : '' }} className='cursor-pointer absolute text-base-content/60 w-[28px] border border-neutral-content/50  h-[28px] bg-base300/74 rounded-[5px] flex justify-center items-center right-[30px] top-[20px] hover:scale-[1.1] transition-all duration-150'>
+            <div className='relative w-[306px] h-[474px] bg-base300 rounded-[20px] p-3 pt-5 pb-10 flex flex-col items-center justify-between'>
+                <button onClick={() => { props.addingNewAdventure ? props.cancelAddNewAdventure!() : '' }} className='cursor-pointer absolute text-base-content/60 w-[28px] border border-neutral-content/50  h-[28px] bg-base300/74 rounded-[5px] flex justify-center items-center right-[35px] top-[30px] hover:scale-[1.1] transition-all duration-150'>
                     {
                         props.addingNewAdventure ?
                             <TrashIcon />
