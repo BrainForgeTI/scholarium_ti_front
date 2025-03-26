@@ -8,6 +8,8 @@ import { NewAdventureCard } from "../../components/NewAdventureCard";
 export const HomePage = () => {
     const api = useApi();
     const [adventures, setAdventures] = useState<AdventureCardType[]>([]);
+    const [newAdventure, setNewAdventure] = useState<AdventureCardType>({ title: '', progress: 0, imageUrl: '', colorFrom: '#000000', colorTo: '#FFFFFF' });
+    const [addingNewAdventure, setAddingNewAdventure] = useState(false);
 
     async function getUserAdventures() {
         const userAdventures = await api.getUserAdventures('');
@@ -34,9 +36,19 @@ export const HomePage = () => {
                                 )
                             })}
 
-                            <li key={'newadventurecard'} className="">
-                                <NewAdventureCard />
-                            </li>
+                            {
+                                addingNewAdventure
+                                    ?
+                                    <li key={'addingadventurecard'}>
+                                        <AdventureCard adventure={newAdventure} />
+                                    </li>
+                                    :
+
+                                    <li key={'newadventurecard'} className="">
+                                        <NewAdventureCard setAddingNewAdventure={setAddingNewAdventure} />
+                                    </li>
+
+                            }
                         </ul>
                     </div>
                 </div>

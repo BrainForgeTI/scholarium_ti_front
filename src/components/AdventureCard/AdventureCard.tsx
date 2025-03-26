@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import FireIcon from '../../assets/icons/fire.svg';
+import TrashIcon from '../../assets/icons/trash.svg';
 import EditIcon from '../../assets/icons/edit.svg';
 import { getTextConstrastColorGradient } from '../../utils/getColorContrastGradient.ts';
 import { AdventureCardType } from '../../types/AdventureCardType.ts';
@@ -16,8 +17,13 @@ const AdventureCard = (props: Props) => {
 
     return (
         <div className="relative w-[306px] min-h-[474px] bg-base300 rounded-[20px] p-3 pb-10 flex flex-col items-center">
-            <button className='cursor-pointer absolute text-base-content/34 w-[21px] h-[21px] bg-base300/74 rounded-[5px] flex justify-center items-center right-[30px] top-[20px]'>
-                <EditIcon />
+            <button className='cursor-pointer absolute text-base-content/60 w-[28px] border border-neutral-content/50  h-[28px] bg-base300/74 rounded-[5px] flex justify-center items-center right-[30px] top-[20px] hover:scale-[1.1] transition-all duration-150'>
+                {
+                    props.adventure.id ?
+                        <EditIcon />
+                        :
+                        <TrashIcon />
+                }
             </button>
 
             <svg width="281" height="217" viewBox="0 0 281 217" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,27 +36,31 @@ const AdventureCard = (props: Props) => {
                 </defs>
                 <foreignObject x="0" y="0" width="281" height="175">
                     <div className="w-full h-full flex flex-col items-center justify-center">
-                        <div className='w-[80px] h-[80px] bg-cover bg-center rounded-[10px]' style={{ backgroundImage: `url("${props.adventure.imageUrl}")` }}></div>
+                        {
+                            props.adventure.id ?
+                                <div className='w-[80px] h-[80px] bg-cover bg-center rounded-[10px]' style={{ backgroundImage: `url("${props.adventure.imageUrl}")` }}></div>
+                                :
+                                <div className='relative w-[80px] h-[80px] rounded-[10px] border border-base-content/50' style={{ backgroundColor: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), opacity: 0.8 }}>
+                                    <button className='absolute bottom-[-10px] right-[-10px] w-[30px] h-[30px] border border-base-content/50 rounded-[5px] text-base-content flex justify-center items-center cursor-pointer hover:scale-[1.1] transition duration-150' style={{ backgroundColor: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>
+                                        <EditIcon />
+                                    </button>
+                                </div>
+
+                        }
                         <span className={`font-bold pt-5`} style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>{props.adventure.title}</span>
                     </div>
                 </foreignObject>
             </svg>
-            {/* <div className='w-full h-[217px] rounded-b-[20px] rounded-t-[20px]' style={{ backgroundImage: `linear-gradient(to right, ${props.adventure.colorFrom}, ${props.adventure.colorTo})` }}>
-                <div className="w-full h-full flex flex-col items-center justify-center">
-                    <div className='w-[80px] h-[80px] bg-cover bg-center rounded-[10px]' style={{ backgroundImage: `url("${props.adventure.imageUrl}")` }}></div>
-                    <span className={`font-bold pt-5`} style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>{props.adventure.title}</span>
-                </div>
-            </div> */}
 
             <div className='w-[90px] h-[90px] mt-2 flex justify-center items-center'>
-                <img src={props.adventure.character.imageUrl}></img>
+                <img src={props.adventure.character?.imageUrl}></img>
             </div>
 
             <div className='w-full flex gap-3 justify-center items-center pt-2'>
-                <span className='font-bold font-[12px] text-base-content'>{props.adventure.character.name}</span>
+                <span className='font-bold font-[12px] text-base-content'>{props.adventure.character?.name}</span>
                 <div className='flex gap-2 text-[#FFB60B] items-center'>
                     <FireIcon />
-                    <span className='font-bold'>{props.adventure.character.level}</span>
+                    <span className='font-bold'>{props.adventure.character?.level}</span>
                 </div>
             </div>
 

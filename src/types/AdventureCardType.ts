@@ -6,6 +6,6 @@ export type AdventureCardType = {
     colorFrom: string
     colorTo: string
     title: string
-    character: Character
+    character?: Character
     progress: number
 }
