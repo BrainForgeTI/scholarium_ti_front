@@ -44,7 +44,7 @@ export const HomePage = () => {
                 <PageTitle title="Minhas Aventuras" />
                 <div className="w-full mt-10">
                     <div className="p-8 rounded-[20px] border p-8 border-base-content/10">
-                        <ul className="md:gap-30 w-full flex flex-wrap justify-center gap-10">
+                        <ul className="lg:mt-5 md:gap-30 w-full flex flex-wrap justify-center gap-10">
                             {adventures.map((adventure) => {
                                 return (
                                     <li key={adventure.id} className="">

@@ -58,7 +58,31 @@ const AdventureCard = (props: Props) => {
     }, [])
 
     return (
-        <div className='flex gap-5'>
+        <div className='relative flex flex-col'>
+            {
+                props.addingNewAdventure ?
+                    <>
+                        <div className='h-7'></div>
+                        <div className='absolute top-[-30px] right-0 flex gap-6 mt-2 justify-end'>
+                            <div>
+                                <label htmlFor='addingnewadventureinput1' className='w-[35px] h-[35px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorFrom }}>
+                                    <EditIcon />
+                                </label>
+                                <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorFrom') }} id='addingnewadventureinput1' type='color' className='h-1 opacity-0' />
+                            </div>
+
+                            <div>
+                                <label htmlFor='addingnewadventureinput2' className='w-[35px] h-[35px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorTo }}>
+                                    <EditIcon />
+                                </label>
+                                <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorTo') }} id='addingnewadventureinput2' type='color' className='h-1 opacity-0' />
+                            </div>
+                        </div>
+                    </>
+                    :
+                    ''
+            }
+
             <div className='relative w-[306px] h-[474px] bg-base300 rounded-[20px] p-3 pt-5 pb-10 flex flex-col items-center justify-between'>
                 <button onClick={() => { props.addingNewAdventure ? props.cancelAddNewAdventure!() : '' }} className='cursor-pointer absolute text-base-content/60 w-[28px] border border-neutral-content/50  h-[28px] bg-base300/74 rounded-[5px] flex justify-center items-center right-[35px] top-[30px] hover:scale-[1.1] transition-all duration-150'>
                     {
@@ -141,27 +165,6 @@ const AdventureCard = (props: Props) => {
 
                 <button onClick={() => { props.addingNewAdventure ? '' : '' }} className='cursor-pointer hover:scale-[1.01] transiion-all duration-150 w-[188px] h-[43px] text-[12px] font-semibold rounded-[10px] mt-6 text-[13px]' style={{ backgroundImage: `linear-gradient(to right, ${props.adventure.colorFrom}, ${props.adventure.colorTo})`, color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>{getCardLabel()}</button>
             </div >
-
-            {
-                props.addingNewAdventure ?
-                    <div className='flex flex-col mt-6'>
-                        <div>
-                            <label htmlFor='addingnewadventureinput1' className='w-[30px] h-[30px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorFrom }}>
-                                <EditIcon />
-                            </label>
-                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorFrom') }} id='addingnewadventureinput1' type='color' className='opacity-0' />
-                        </div>
-
-                        <div>
-                            <label htmlFor='addingnewadventureinput2' className='w-[30px] h-[30px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorTo }}>
-                                <EditIcon />
-                            </label>
-                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorTo') }} id='addingnewadventureinput2' type='color' className='visible opacity-0' />
-                        </div>
-                    </div>
-                    :
-                    ''
-            }
         </div>
     )
 }
