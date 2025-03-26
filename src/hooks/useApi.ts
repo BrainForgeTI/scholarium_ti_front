@@ -8,8 +8,8 @@ export const useApi = () => ({
                 id: '8428ry428ohohr2',
                 imageUrl: 'https://pbs.twimg.com/profile_images/1785867863191932928/EpOqfO6d_400x400.png',
                 title: 'Aventura de React',
-                colorFrom: '#DE9673',
-                colorTo: '#E06527',
+                colorFrom: '#000000',
+                colorTo: '#6A0000',
                 character: {
                     imageUrl: 'https://media.discordapp.net/attachments/838520690726010993/1353736029655535646/WhatsApp_Image_2025-02-23_at_14.07.16__1_-removebg-preview_2_1.png?ex=67e2bc6c&is=67e16aec&hm=279c2a0a9952b1789ace57b5ccbd28aafb362a838bcfa4d8854f0b83a4d7c9e3&=&format=webp&quality=lossless&width=84&height=88',
                     name: 'Marcão',
