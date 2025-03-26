@@ -9,6 +9,7 @@ import { AdventureCardType } from '../../types/AdventureCardType.ts';
 
 interface Props {
     adventure: AdventureCardType;
+    setAdventures?: React.Dispatch<React.SetStateAction<AdventureCardType[]>>;
     setNewAdventure?: React.Dispatch<React.SetStateAction<AdventureCardType>>;
     addingNewAdventure?: boolean;
     cancelAddNewAdventure?: () => void;
@@ -21,6 +22,21 @@ const AdventureCard = (props: Props) => {
             props.setNewAdventure((prev) => ({
                 ...prev,
                 title: event.target.value
+            }))
+        }
+    }
+
+    function handleColorPicker(event: ChangeEvent<HTMLInputElement>, field: string) {
+        const value = event.target.value;
+
+        if (props.setAdventures) {
+            props.setAdventures((prev) =>
+                prev.map((card) => card.id === props.adventure.id ? { ...card, [field]: value } : card)
+            )
+        } else if (props.setNewAdventure) {
+            props.setNewAdventure((prev) => ({
+                ...prev,
+                [field]: value
             }))
         }
     }
@@ -128,11 +144,20 @@ const AdventureCard = (props: Props) => {
 
             {
                 props.addingNewAdventure ?
-                    <div>
-                        <label htmlFor='addingnewadventureinput' className='w-[30px] h-[30px] rounded-[5px] bg-red-600 block' >
+                    <div className='flex flex-col mt-6'>
+                        <div>
+                            <label htmlFor='addingnewadventureinput1' className='w-[30px] h-[30px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorFrom }}>
+                                <EditIcon />
+                            </label>
+                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorFrom') }} id='addingnewadventureinput1' type='color' className='invisible h-0' />
+                        </div>
 
-                        </label>
-                        <input id='addingnewadventureinput' type='color' className='hidden' />
+                        <div>
+                            <label htmlFor='addingnewadventureinput2' className='w-[30px] h-[30px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorTo }}>
+                                <EditIcon />
+                            </label>
+                            <input onChange={(event: ChangeEvent<HTMLInputElement>) => { handleColorPicker(event, 'colorTo') }} id='addingnewadventureinput2' type='color' className='invisible h-0' />
+                        </div>
                     </div>
                     :
                     ''

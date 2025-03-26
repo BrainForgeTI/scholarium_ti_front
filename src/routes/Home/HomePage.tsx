@@ -48,7 +48,7 @@ export const HomePage = () => {
                             {adventures.map((adventure) => {
                                 return (
                                     <li key={adventure.id} className="">
-                                        <AdventureCard adventure={adventure} />
+                                        <AdventureCard adventure={adventure} setAdventures={setAdventures} />
                                     </li>
                                 )
                             })}
