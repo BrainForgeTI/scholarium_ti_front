@@ -41,6 +41,27 @@ const AdventureCard = (props: Props) => {
         }
     }
 
+    function handleInputImage(event: ChangeEvent<HTMLInputElement>) {
+        const file = event.target.files?.[0];
+
+        if (props.setNewAdventure && file) {
+            props.setNewAdventure((prev) => ({
+                ...prev,
+                image: file
+            }))
+        }
+    }
+
+    function generateImgUrlToAdventure(image: File | string | null) {
+        if (image instanceof File) {
+            return `url("${URL.createObjectURL(image)}")`
+        } else if (typeof image === 'string') {
+            return `url("${image}"`
+        }
+
+        return LogoImg
+    }
+
     function getCardLabel() {
         if (props.adventure.progress > 0) {
             return 'Começar';
@@ -106,17 +127,20 @@ const AdventureCard = (props: Props) => {
                             {
                                 props.addingNewAdventure ?
                                     <>
-                                        <div className='relative w-[80px] h-[80px] rounded-[10px] border bg-cover bg-center' style={{ backgroundColor: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundImage: `url("${props.adventure.imageUrl}")`, borderColor: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>
-                                            <button className='absolute bottom-[-10px] right-[-10px] w-[30px] h-[30px] text-base-content bg-base300 border rounded-[5px] flex justify-center items-center cursor-pointer hover:scale-[1.1] transition duration-150' style={{ borderColor: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>
-                                                <EditIcon />
-                                            </button>
+                                        <div className='relative w-[80px] h-[80px] rounded-[10px] border bg-cover bg-center' style={{ backgroundColor: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundImage: generateImgUrlToAdventure(props.adventure.image), borderColor: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>
+                                            <div className='absolute bottom-[-10px] right-[-10px] w-[30px] h-[30px]'>
+                                                <label htmlFor='adventureimageinput' className='w-full h-full text-base-content bg-base300 border rounded-[5px] flex justify-center items-center cursor-pointer hover:scale-[1.1] transition duration-150' style={{ borderColor: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>
+                                                    <EditIcon />
+                                                </label>
+                                                <input onChange={handleInputImage} id='adventureimageinput' type='file' className='invisible' />
+                                            </div>
 
                                             {
-                                                props.adventure.imageUrl ?
+                                                props.adventure.image ?
                                                     ''
                                                     :
                                                     <div className='w-full h-full bg-base300 rounded-[10px] flex justify-center items-center'>
-                                                        <img src={LogoImg} />
+                                                        <img src={generateImgUrlToAdventure(props.adventure.image)} />
                                                     </div>
                                             }
 
@@ -126,7 +150,7 @@ const AdventureCard = (props: Props) => {
                                     </>
                                     :
                                     <>
-                                        <div className='w-[80px] h-[80px] bg-cover bg-center rounded-[10px]' style={{ backgroundImage: `url("${props.adventure.imageUrl}")` }}></div>
+                                        <div className='w-[80px] h-[80px] bg-cover bg-center rounded-[10px]' style={{ backgroundImage: `url("${props.adventure.image}")` }}></div>
                                         <span className={`font-bold pt-5`} style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>{props.adventure.title}</span>
                                     </>
                             }

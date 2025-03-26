@@ -8,12 +8,11 @@ import { NewAdventureCard } from "../../components/NewAdventureCard";
 export const HomePage = () => {
     const api = useApi();
     const [adventures, setAdventures] = useState<AdventureCardType[]>([]);
-    const [newAdventure, setNewAdventure] = useState<AdventureCardType>({ title: 'Nova Aventura', progress: 0, imageUrl: '', colorFrom: '#000000', colorTo: '#FFFFFF' });
+    const [newAdventure, setNewAdventure] = useState<AdventureCardType>({ title: 'Nova Aventura', progress: 0, image: null, colorFrom: '#000000', colorTo: '#FFFFFF' });
     const [addingNewAdventure, setAddingNewAdventure] = useState(false);
 
     async function getUserAdventures() {
         const userAdventures = await api.getUserAdventures('');
-        console.log(userAdventures)
         setAdventures(userAdventures)
     }
 
@@ -31,7 +30,7 @@ export const HomePage = () => {
     function cancelAddNewAdventure() {
         console.log('chamou')
         setAddingNewAdventure(false);
-        setNewAdventure({ title: 'Nova Aventura', progress: 0, imageUrl: '', colorFrom: '#000000', colorTo: '#FFFFFF' });
+        setNewAdventure({ title: 'Nova Aventura', progress: 0, image: '', colorFrom: '#000000', colorTo: '#FFFFFF' });
     }
 
     useEffect(() => {

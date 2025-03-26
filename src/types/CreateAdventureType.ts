@@ -1,8 +1,7 @@
 import { Character } from "./CharacterType"
 
-export type AdventureCardType = {
-    id?: string
-    image: File | string | null
+export type CreateAdventureType = {
+    image: File | null
     colorFrom: string
     colorTo: string
     title: string
