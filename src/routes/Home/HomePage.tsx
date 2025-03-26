@@ -24,19 +24,21 @@ export const HomePage = () => {
             <>
                 <PageTitle title="Minhas Aventuras" />
                 <div className="w-full">
-                    <ul className="w-full pt-10 grid grid-cols-4 gap-30">
-                        {adventures.map((adventure) => {
-                            return (
-                                <li key={adventure.id} className="w-full">
-                                    <AdventureCard adventure={adventure} />
-                                </li>
-                            )
-                        })}
+                    <div className="p-8 rounded-[20px] border py-20 border-base-content/10">
+                        <ul className="w-full flex flex-wrap justify-center gap-30">
+                            {adventures.map((adventure) => {
+                                return (
+                                    <li key={adventure.id} className="">
+                                        <AdventureCard adventure={adventure} />
+                                    </li>
+                                )
+                            })}
 
-                        <li key={'newadventurecard'} className="w-full">
-                            <NewAdventureCard />
-                        </li>
-                    </ul>
+                            <li key={'newadventurecard'} className="">
+                                <NewAdventureCard />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </>
         </PageLayout>
