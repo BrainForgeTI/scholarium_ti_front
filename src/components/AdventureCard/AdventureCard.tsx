@@ -6,6 +6,8 @@ import AddIcon from '../../assets/icons/add.svg';
 import LogoImg from '../../assets/images/logo_sm.png';
 import { getInvertedColorConstrast, getTextConstrastColorGradient } from '../../utils/getColorContrastGradient.ts';
 import { AdventureCardType } from '../../types/AdventureCardType.ts';
+import { getDominantColorFromImage } from '../../utils/getDominantColorFromImage.ts';
+import { rgbToHex } from '../../utils/rgbToHex.ts';
 
 interface Props {
     adventure: AdventureCardType;
@@ -44,11 +46,25 @@ const AdventureCard = (props: Props) => {
     function handleInputImage(event: ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0];
 
-        if (props.setNewAdventure && file) {
-            props.setNewAdventure((prev) => ({
-                ...prev,
-                image: file
-            }))
+
+        if (file) {
+            let imageUrl = URL.createObjectURL(file);
+            let image = new Image();
+            image.src = imageUrl;
+
+            image.onload = function () {
+                let color = getDominantColorFromImage(image);
+                if (props.setNewAdventure && color) {
+                    let colorHex = rgbToHex(color);
+                    props.setNewAdventure((prev) => ({
+                        ...prev,
+                        image: image.src,
+                        colorFrom: colorHex,
+                        colorTo: colorHex
+                    }))
+                }
+            }
+
         }
     }
 
@@ -73,10 +89,6 @@ const AdventureCard = (props: Props) => {
 
         return "Continuar";
     }
-
-    useEffect(() => {
-        console.log(getTextConstrastColorGradient('#DE9673', '#E06527'))
-    }, [])
 
     return (
         <div className='relative flex flex-col'>
