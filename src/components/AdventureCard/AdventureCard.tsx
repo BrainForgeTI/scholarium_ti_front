@@ -95,8 +95,8 @@ const AdventureCard = (props: Props) => {
             {
                 props.addingNewAdventure ?
                     <>
-                        <div className='h-7'></div>
-                        <div className='absolute top-[-30px] right-0 flex gap-6 mt-2 justify-end'>
+                        {/* <div className='h-7'></div> */}
+                        <div className='lg:gap-4 absolute top-[-60px] right-0 flex gap-4 mt-2 justify-end'>
                             <div>
                                 <label htmlFor='addingnewadventureinput1' className='w-[35px] h-[35px] rounded-[5px] block flex justify-center items-center' style={{ color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo), backgroundColor: props.adventure.colorFrom }}>
                                     <EditIcon />
