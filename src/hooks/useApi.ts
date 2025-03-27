@@ -99,5 +99,22 @@ export const useApi = () => ({
         ]
 
         return response;
+    },
+
+    createAdventure: async (userId: string, adventure: AdventureCardType) => {
+
+        //mock
+        let random = Math.floor(Math.random() * 10)
+        let response;
+
+        if (random > 4) {
+            response = { status: 201, cardId: 'fjmwpijg39j3r' }
+        } else {
+            response = { status: 500 }
+        }
+
+        return setTimeout(() => {
+            return response;
+        }, 1000)
     }
 })

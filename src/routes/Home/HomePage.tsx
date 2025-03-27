@@ -27,6 +27,10 @@ export const HomePage = () => {
         setAddingNewAdventure(true)
     }
 
+    function createAdventure() {
+
+    }
+
     function cancelAddNewAdventure() {
         console.log('chamou')
         setAddingNewAdventure(false);
