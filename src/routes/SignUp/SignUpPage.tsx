@@ -2,7 +2,7 @@ import {Menu} from "../../components/PagelayoutLogin/menu"
 import TreeTravaller from "../../assets/images/treeTravallers.png"
 
 import wave from "../../assets/images/wave_bg.png"
-export const Registro = () => {
+export const SignUpPage = () => {
     return ( <div className="flex bg-base200 h-screen w-screen font-poppins ">
             <Menu/>
             <div className="w-2/5  h-full"></div>
