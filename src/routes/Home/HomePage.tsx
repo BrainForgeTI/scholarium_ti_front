@@ -8,7 +8,7 @@ import { NewAdventureCard } from "../../components/NewAdventureCard";
 export const HomePage = () => {
     const api = useApi();
     const [adventures, setAdventures] = useState<AdventureCardType[]>([]);
-    const [newAdventure, setNewAdventure] = useState<AdventureCardType>({ title: 'Nova Aventura', progress: 0, image: null, colorFrom: '#000000', colorTo: '#FFFFFF' });
+    const [newAdventure, setNewAdventure] = useState<AdventureCardType>({ id: 'newTemp', title: 'Nova Aventura', progress: 0, image: null, colorFrom: '#000000', colorTo: '#FFFFFF' });
     const [addingNewAdventure, setAddingNewAdventure] = useState(false);
 
     async function getUserAdventures() {
@@ -27,7 +27,32 @@ export const HomePage = () => {
         setAddingNewAdventure(true)
     }
 
-    function createAdventure() {
+    async function createAdventure() {
+        let newObjectAdventure = { ...newAdventure }
+        console.log(newObjectAdventure)
+        let adventuresTemp = adventures.slice();
+        adventuresTemp.push(newObjectAdventure);
+        setAdventures(adventuresTemp)
+
+        setAddingNewAdventure(false);
+        setNewAdventure({ id: 'newTemp', title: 'Nova Aventura', progress: 0, image: '', colorFrom: '#000000', colorTo: '#FFFFFF' })
+
+        const response = await api.createAdventure('j2f942', newObjectAdventure);
+
+        console.log(response)
+
+        if (response.status !== 201) {
+            setTimeout(() => {
+                setAdventures((prev) => prev.slice(0, -1));
+                setAddingNewAdventure(true)
+                setNewAdventure(newObjectAdventure)
+            }, 1000)
+        } else {
+
+            setAdventures((prev) =>
+                prev.map((element, index) => index == prev.length - 1 ? { ...element, id: response.cardId } : element)
+            )
+        }
 
     }
 
@@ -60,7 +85,7 @@ export const HomePage = () => {
                                 addingNewAdventure
                                     ?
                                     <li key={'addingadventurecard'} className="md:mt-0 mt-10">
-                                        <AdventureCard setNewAdventure={setNewAdventure} cancelAddNewAdventure={cancelAddNewAdventure} addingNewAdventure={addingNewAdventure} adventure={newAdventure} />
+                                        <AdventureCard createAdventure={createAdventure} setNewAdventure={setNewAdventure} cancelAddNewAdventure={cancelAddNewAdventure} addingNewAdventure={addingNewAdventure} adventure={newAdventure} />
                                     </li>
                                     :
 

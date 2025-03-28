@@ -15,6 +15,7 @@ interface Props {
     setNewAdventure?: React.Dispatch<React.SetStateAction<AdventureCardType>>;
     addingNewAdventure?: boolean;
     cancelAddNewAdventure?: () => void;
+    createAdventure?: () => void;
 }
 
 const AdventureCard = (props: Props) => {
@@ -127,9 +128,9 @@ const AdventureCard = (props: Props) => {
                 </button>
 
                 <svg width="281" height="217" viewBox="0 0 281 217" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 20C0 8.95428 8.9543 0 20 0H261C272.046 0 281 8.95431 281 20V170.347C281 173.063 280.445 175.83 279.259 178.273C242.899 253.158 136.273 200.433 16.714 177.454C7.09941 175.606 0 167.281 0 157.49V20Z" fill={`url(#paint0_linear_143_284_${props.adventure.id})`} />
+                    <path d="M0 20C0 8.95428 8.9543 0 20 0H261C272.046 0 281 8.95431 281 20V170.347C281 173.063 280.445 175.83 279.259 178.273C242.899 253.158 136.273 200.433 16.714 177.454C7.09941 175.606 0 167.281 0 157.49V20Z" fill={`url(#${props.adventure.id})`} />
                     <defs>
-                        <linearGradient id={`paint0_linear_143_284_${props.adventure.id}`} x1="6.5" y1="171.5" x2="276" y2="4.5" gradientUnits="userSpaceOnUse">
+                        <linearGradient id={`${props.adventure.id}`} x1="6.5" y1="171.5" x2="276" y2="4.5" gradientUnits="userSpaceOnUse">
                             <stop stopColor={props.adventure.colorFrom} />
                             <stop offset="1" stopColor={props.adventure.colorTo} />
                         </linearGradient>
@@ -199,7 +200,11 @@ const AdventureCard = (props: Props) => {
                         </>
                 }
 
-                <button onClick={() => { props.addingNewAdventure ? '' : '' }} className='cursor-pointer hover:scale-[1.01] transiion-all duration-150 w-[188px] h-[43px] text-[12px] font-semibold rounded-[10px] mt-6 text-[13px]' style={{ backgroundImage: `linear-gradient(to right, ${props.adventure.colorFrom}, ${props.adventure.colorTo})`, color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>{getCardLabel()}</button>
+                <button onClick={() => {
+                    if (props.addingNewAdventure && props.createAdventure) {
+                        props.createAdventure();
+                    }
+                }} className='cursor-pointer hover:scale-[1.01] transiion-all duration-150 w-[188px] h-[43px] text-[12px] font-semibold rounded-[10px] mt-6 text-[13px]' style={{ backgroundImage: `linear-gradient(to right, ${props.adventure.colorFrom}, ${props.adventure.colorTo})`, color: getTextConstrastColorGradient(props.adventure.colorFrom, props.adventure.colorTo) }}>{getCardLabel()}</button>
             </div >
         </div>
     )
