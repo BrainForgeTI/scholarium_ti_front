@@ -1,26 +1,23 @@
-import { AuthFormsBox, AuthFormsInput, PagelayoutAuth } from "../../components/PagelayoutAuth";
+import { AuthFormsBox, PagelayoutAuth } from "../../components/PagelayoutAuth";
 import TreeTravaller from "../../assets/images/treeTravallers.png";
 import { ChangeEvent, useEffect, useState } from "react";
 import { SignUpFormType } from "../../types/auth_types/SignUpFormType";
-import { BackStepButton, AuthSubmitButton } from "./index";
+import { BackStepButton, AuthSubmitButton, AuthChooseInput } from "./index";
 import { AuthStepType } from "../../types/auth_types/AuthStepType";
-import AuthChooseInput from "./components/AuthChooseInput";
-import { AuthStepFields } from "../../types/auth_types/AuthStepField";
 import { Validator } from "../../utils/validator";
 
 export const SignUpPage = () => {
     const [currentStep, setCurrentStep] = useState({
         step: 0,
-        action: () => { }
     });
 
     const [signUpForm, setSignUpForm] = useState<SignUpFormType>({
         firstName: '',
         lastName: '',
         userName: '',
-        profileImage: '',
+        profileImage: null,
         dateOfBirth: new Date(),
-        gender: '',
+        gender: 'Masculino',
         email: '',
         password: '',
         confirmPassword: '',
@@ -48,7 +45,7 @@ export const SignUpPage = () => {
             fields: [
                 { fieldId: 'profileImage', fieldType: 'file', fieldLabel: "", fieldPlaceholder: '', fieldValidator: (value: any) => { return true } },
                 { fieldId: 'dateOfBirth', fieldType: 'date', fieldLabel: "Data de nascimento", fieldPlaceholder: 'Data de aniversário', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'gender', fieldType: 'select', fieldLabel: "Gênero", fieldPlaceholder: 'Gênero', selectValues: ['Masculino', 'Feminino', 'Outro'], fieldValidator: (value: any) => { return true } }
+                { fieldId: 'gender', fieldType: 'select', fieldLabel: "Gênero", fieldPlaceholder: 'Gênero', selectValues: [{ label: 'Masculino', value: 'male' }, { label: 'Feminino', value: 'female' }, { label: 'Outro', value: 'other' }], fieldValidator: (value: any) => { return !validator.emptyString(value) } }
             ]
         },
         {
@@ -87,6 +84,16 @@ export const SignUpPage = () => {
         }));
     }
 
+    function handleSignUpImageInput(event: ChangeEvent<HTMLInputElement>, field: string) {
+        if (event.target.files && event.target.files.length > 0) {
+
+            setSignUpForm((prev) => ({
+                ...prev,
+                [field]: event.target.files![0]
+            }));
+        }
+    }
+
     function checkAndSetValidStep(step: number) {
         const foundStep = steps.find((item) => item.step == step)
         if (foundStep) {
@@ -107,9 +114,27 @@ export const SignUpPage = () => {
         }
     }
 
+    function goToNextStep() {
+        console.log("oi")
+        const nextStep = currentStep.step + 1;
+        console.log(steps[0])
+        if (steps[currentStep.step].validStep) {
+            setCurrentStep({ step: nextStep })
+        }
+    }
+
+    function backStep() {
+        if (currentStep.step > 0) {
+            setCurrentStep((prev) => ({ ...prev, step: currentStep.step - 1 }))
+        }
+    }
+
     useEffect(() => {
         checkAndSetValidStep(0);
+        checkAndSetValidStep(1);
+        console.log(signUpForm)
     }, [signUpForm])
+
 
     return (
         <PagelayoutAuth right={true} pageText={<p> Comece sua <span className="text-4xl text-primary font-bold">JORNADA</span> agora! </p>} pageImage={TreeTravaller} imageAlt="">
@@ -120,21 +145,29 @@ export const SignUpPage = () => {
                     <AuthFormsBox>
                         <div className="w-full flex flex-col gap-5">
                             {
-                                steps[currentStep.step].showReturn ? <BackStepButton /> : <></>
+                                steps[currentStep.step].showReturn ? <BackStepButton action={backStep} /> : <></>
                             }
 
                             {
-                                currentStep.step == 0 ?
+                                currentStep.step === 0 || currentStep.step === 1 || currentStep.step === 2 ?
                                     steps[currentStep.step].fields.map((step, index) => {
                                         return (
-                                            <AuthChooseInput form={signUpForm} step={step} index={index} handleInput={handleSignUpFormInput} />
+                                            <>
+                                                {
+                                                    step.fieldType !== 'file' ?
+                                                        <AuthChooseInput form={signUpForm} step={step} index={index} handleInput={handleSignUpFormInput} />
+                                                        :
+                                                        <AuthChooseInput form={signUpForm} step={step} index={index} handleInput={handleSignUpImageInput} />
+                                                }
+                                            </>
                                         )
                                     })
                                     :
                                     <></>
                             }
 
-                            <AuthSubmitButton action={currentStep.action} label={steps[currentStep.step].buttonLabel} styles={steps[currentStep.step].validStep ? 'bg-primary text-primary-content border-transparent' : 'bg-primary/0 border-primary-content/50 text-primary-content/50'} disabled={steps[currentStep.step].validStep} />
+
+                            <AuthSubmitButton action={goToNextStep} label={steps[currentStep.step].buttonLabel} styles={steps[currentStep.step].validStep ? 'bg-primary text-primary-content border-transparent mt-6' : 'mt-6 bg-primary/0 border-primary-content/50 text-primary-content/50'} disabled={steps[currentStep.step].validStep} />
 
                         </div>
                     </AuthFormsBox>

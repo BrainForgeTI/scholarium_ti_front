@@ -7,7 +7,7 @@ interface Props {
 
 const AuthSubmitButton = (props: Props) => {
     return (
-        <button type="button" className={`text-[18px] ${props.disabled ? 'hover:scale-[1.03] cursor-pointer' : 'cursor-not-allowed'} border transition-all duration-250 rounded-[10px] h-[50px] flex items-center justify-center ${props.styles}`} disabled={props.disabled} >{props.label}</button>
+        <button onClick={props.action} type="button" className={`text-[18px] ${props.disabled ? 'hover:scale-[1.03] cursor-pointer' : 'cursor-not-allowed'} border transition-all duration-250 rounded-[10px] h-[50px] flex items-center justify-center ${props.styles}`} disabled={!props.disabled} >{props.label}</button>
     )
 }
 

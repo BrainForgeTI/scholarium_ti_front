@@ -2,7 +2,7 @@ export type SignUpFormType = {
     firstName: string
     lastName: string
     userName: string
-    profileImage: string
+    profileImage: File | null
     dateOfBirth: Date
     gender: string
     email: string

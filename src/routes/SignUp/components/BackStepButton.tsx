@@ -4,9 +4,9 @@ interface Props {
     action: () => void
 }
 
-const BackStepButton = () => {
+const BackStepButton = (props: Props) => {
     return (
-        <button className="flex gap-2 cursor-pointer items-center text-[14px] text-white/50 mb-8">
+        <button onClick={props.action} type="button" className="flex gap-2 cursor-pointer items-center text-[14px] text-white/50 mb-8">
             <ArrowLeftIcon />
             <span className="underline">Voltar</span>
         </button>
