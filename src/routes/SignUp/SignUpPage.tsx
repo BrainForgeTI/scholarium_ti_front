@@ -1,13 +1,16 @@
 import { AuthFormsBox, AuthFormsInput, PagelayoutAuth } from "../../components/PagelayoutAuth";
 import TreeTravaller from "../../assets/images/treeTravallers.png";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { SignUpFormType } from "../../types/auth_types/SignUpFormType";
 import { BackStepButton, AuthSubmitButton } from "./index";
 import { AuthStepType } from "../../types/auth_types/AuthStepType";
+import AuthChooseInput from "./components/AuthChooseInput";
+import { AuthStepFields } from "../../types/auth_types/AuthStepField";
+import { Validator } from "../../utils/validator";
 
 export const SignUpPage = () => {
     const [currentStep, setCurrentStep] = useState({
-        step: 1,
+        step: 0,
         action: () => { }
     });
 
@@ -31,9 +34,9 @@ export const SignUpPage = () => {
             buttonLabel: 'Próximo',
             validStep: false,
             fields: [
-                { fieldId: 'firstName', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'lastName', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'userName', fieldValidator: (value: any) => { return true } }
+                { fieldId: 'firstName', fieldType: 'text', fieldLabel: "Primeiro nome", fieldPlaceholder: 'Seu nome', fieldValidator: (value: any) => { return !validator.emptyString(value) } },
+                { fieldId: 'lastName', fieldType: 'text', fieldLabel: "Último nome", fieldPlaceholder: 'Seu sobrenome', fieldValidator: (value: any) => { return !validator.emptyString(value) } },
+                { fieldId: 'userName', fieldType: 'text', fieldLabel: "Nome de usuário", fieldPlaceholder: 'Seu nome de usuário', fieldValidator: (value: any) => { return !validator.emptyString(value) } }
             ]
         },
         {
@@ -43,9 +46,9 @@ export const SignUpPage = () => {
             buttonLabel: 'Próximo',
             validStep: false,
             fields: [
-                { fieldId: 'profileImage', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'dateOfBirth', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'gender', fieldValidator: (value: any) => { return true } }
+                { fieldId: 'profileImage', fieldType: 'file', fieldLabel: "", fieldPlaceholder: '', fieldValidator: (value: any) => { return true } },
+                { fieldId: 'dateOfBirth', fieldType: 'date', fieldLabel: "Data de nascimento", fieldPlaceholder: 'Data de aniversário', fieldValidator: (value: any) => { return true } },
+                { fieldId: 'gender', fieldType: 'select', fieldLabel: "Gênero", fieldPlaceholder: 'Gênero', selectValues: ['Masculino', 'Feminino', 'Outro'], fieldValidator: (value: any) => { return true } }
             ]
         },
         {
@@ -55,9 +58,9 @@ export const SignUpPage = () => {
             buttonLabel: 'Confirmar cadastro',
             validStep: false,
             fields: [
-                { fieldId: 'email', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'password', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'password', fieldValidator: (value: any) => { return true } }
+                { fieldId: 'email', fieldType: 'email', fieldLabel: "E-mail", fieldPlaceholder: 'Seu email', fieldValidator: (value: any) => { return true } },
+                { fieldId: 'password', fieldType: 'password', fieldLabel: "Senha", fieldPlaceholder: 'Sua senha', fieldValidator: (value: any) => { return true } },
+                { fieldId: 'password', fieldType: 'password', fieldLabel: "Confirmar senha", fieldPlaceholder: 'Confirme a senha', fieldValidator: (value: any) => { return true } }
             ]
         },
         {
@@ -67,13 +70,15 @@ export const SignUpPage = () => {
             buttonLabel: 'Validar',
             validStep: false,
             fields: [
-                { fieldId: 'code1', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'code2', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'code3', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'code4', fieldValidator: (value: any) => { return true } }
+                { fieldId: 'code1', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return true } },
+                { fieldId: 'code2', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return true } },
+                { fieldId: 'code3', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return true } },
+                { fieldId: 'code4', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return true } }
             ]
         }
     ]);
+
+    const validator: Validator = new Validator();
 
     function handleSignUpFormInput(event: ChangeEvent<HTMLInputElement>, field: string) {
         setSignUpForm((prev) => ({
@@ -82,9 +87,29 @@ export const SignUpPage = () => {
         }));
     }
 
-    function validStep(step: number) {
+    function checkAndSetValidStep(step: number) {
+        const foundStep = steps.find((item) => item.step == step)
+        if (foundStep) {
+            const fields = foundStep.fields;
 
+            let validFieldsAtThisStep = true;
+
+            for (let field of fields) {
+                if (!field.fieldValidator(signUpForm[field.fieldId])) {
+                    validFieldsAtThisStep = false;
+                    break;
+                }
+            }
+
+            setSteps((prev) =>
+                prev.map((item) => item.step === step ? { ...item, validStep: validFieldsAtThisStep } : item)
+            )
+        }
     }
+
+    useEffect(() => {
+        checkAndSetValidStep(0);
+    }, [signUpForm])
 
     return (
         <PagelayoutAuth right={true} pageText={<p> Comece sua <span className="text-4xl text-primary font-bold">JORNADA</span> agora! </p>} pageImage={TreeTravaller} imageAlt="">
@@ -99,23 +124,17 @@ export const SignUpPage = () => {
                             }
 
                             {
-                                currentStep.step == 1 ?
-                                    // <>
-                                    //     <AuthFormsInput handleInputValue={handleSignUpFormInput} value={signUpForm.firstName} id="firstName" label="Primeiro nome" placeholder="Seu nome" type="text" />
-                                    //     <AuthFormsInput handleInputValue={handleSignUpFormInput} value={signUpForm.lastName} id="lastName" label="Último nome" placeholder="Seu sobrenome" type="text" />
-                                    //     <AuthFormsInput handleInputValue={handleSignUpFormInput} value={signUpForm.userName} id="userName" label="Nome de usuário" placeholder="Seu nome de usuário" type="text" />
-                                    // </>
-
+                                currentStep.step == 0 ?
                                     steps[currentStep.step].fields.map((step, index) => {
                                         return (
-                                            <AuthFormsInput key={`step-${index}`} handleInputValue={handleSignUpFormInput} value={signUpForm[step.fieldId]} id={step.fieldId} label="Primeiro nome" placeholder="Seu nome" type="text" />
+                                            <AuthChooseInput form={signUpForm} step={step} index={index} handleInput={handleSignUpFormInput} />
                                         )
                                     })
                                     :
                                     <></>
                             }
 
-                            <AuthSubmitButton action={currentStep.action} label={steps[currentStep.step].buttonLabel} />
+                            <AuthSubmitButton action={currentStep.action} label={steps[currentStep.step].buttonLabel} styles={steps[currentStep.step].validStep ? 'bg-primary text-primary-content border-transparent' : 'bg-primary/0 border-primary-content/50 text-primary-content/50'} disabled={steps[currentStep.step].validStep} />
 
                         </div>
                     </AuthFormsBox>
