@@ -187,8 +187,8 @@ export const SignUpPage = () => {
 
     return (
         <PagelayoutAuth right={true} pageText={<p> Comece sua <span className="text-4xl text-primary font-bold">JORNADA</span> agora! </p>} pageImage={TreeTravaller} imageAlt="3 homens indo em direção à um castelo">
-            <div className="w-full">
-                <div className="w-[384px]">
+            <div className="w-full flex lg:block justify-center">
+                <div className="w-[320px] lg:w-[384px]">
                     <h1 className="text-base-content text-[20px] font-medium text-center mb-5">{steps[currentStep.step].title}</h1>
 
                     <AuthFormsBox>
