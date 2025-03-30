@@ -6,6 +6,7 @@ export type AuthStepFields = {
     fieldType: string
     fieldLabel: string
     fieldPlaceholder: string
+    equalTo?: string
     selectValues?: SelectInputType[]
     fieldValidator: (value: any) => boolean
 }

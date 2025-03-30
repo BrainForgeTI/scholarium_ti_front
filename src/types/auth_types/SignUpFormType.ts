@@ -3,9 +3,10 @@ export type SignUpFormType = {
     lastName: string
     userName: string
     profileImage: File | null
-    dateOfBirth: Date
+    dateOfBirth: string
     gender: string
     email: string
     password: string
     confirmPassword: string
+    terms: boolean
 }

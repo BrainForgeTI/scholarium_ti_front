@@ -30,7 +30,7 @@ const AuthChooseInput = (props: Props) => {
 
             {
                 props.step.fieldType == 'file' ?
-                    <AuthImageInput handleInputValue={props.handleInput} id={props.step.fieldId} type={props.step.fieldType} key={`input-${props.index}`} value={props.form[props.step.fieldId]} />
+                    <AuthImageInput key={`input-${props.index}`} handleInputValue={props.handleInput} id={props.step.fieldId} type={props.step.fieldType} key={`input-${props.index}`} value={props.form[props.step.fieldId]} />
                     :
                     <></>
             }
