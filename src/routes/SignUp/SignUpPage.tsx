@@ -134,7 +134,7 @@ export const SignUpPage = () => {
                 }
             }
 
-            if (!signUpForm.terms) {
+            if (!signUpForm.terms && step == 2) {
                 validFieldsAtThisStep = false
             }
 
@@ -171,7 +171,6 @@ export const SignUpPage = () => {
         checkAndSetValidStep(0);
         checkAndSetValidStep(1);
         checkAndSetValidStep(2);
-        console.log(signUpForm)
     }, [signUpForm])
 
     useEffect(() => {
@@ -186,9 +185,9 @@ export const SignUpPage = () => {
 
 
     return (
-        <PagelayoutAuth right={true} pageText={<p> Comece sua <span className="text-4xl text-primary font-bold">JORNADA</span> agora! </p>} pageImage={TreeTravaller} imageAlt="3 homens indo em direção à um castelo">
-            <div className="w-full flex lg:block justify-center">
-                <div className="w-[320px] lg:w-[384px]">
+        <PagelayoutAuth right={true} pageText={<p className="text-xl lg:w-[300px] xl:w-auto 2xl:w-auto text-end"> Comece sua <span className="text-3xl 2xl:text-4xl text-primary font-bold">JORNADA</span> agora! </p>} pageImage={TreeTravaller} imageAlt="3 homens indo em direção à um castelo">
+            <div className="w-[320px] lg:w-[384px] flex lg:block justify-center">
+                <div className="w-full">
                     <h1 className="text-base-content text-[20px] font-medium text-center mb-5">{steps[currentStep.step].title}</h1>
 
                     <AuthFormsBox>
