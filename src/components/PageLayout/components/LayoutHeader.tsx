@@ -6,16 +6,16 @@ const LayoutHeader = () => {
         <div className="h-[60px] w-full bg-neutral/6 border-b border-neutral/20">
             <div className='w-full h-full flex justify-end px-8'>
                 <ul className='flex items-center gap-10'>
-                    <li className='flex items-center gap-4'>
+                    <li className='lg:flex hidden items-center gap-4'>
                         <span className='font-semibold text-[18px] text-base-content'>500</span>
                         <img src={GoldImg}></img>
                     </li>
 
-                    <li>
+                    <li className='lg:block hidden'>
                         <div className='w-[2px] h-[21px] rounded-full bg-neutral/50'></div>
                     </li>
 
-                    <li className='flex gap-4'>
+                    <li className='lg:flex gap-4 hidden'>
                         <div className='flex flex-col text-base-content'>
                             <span className='text-end text-[11px]'>Bem-vindo</span>
                             <span className='font-semibold text-[16px]'>Emerson Tanno</span>
@@ -25,7 +25,7 @@ const LayoutHeader = () => {
                         </div>
                     </li>
 
-                    <li>
+                    <li className='lg:block hidden'>
                         <div className='w-[2px] h-[21px] rounded-full bg-neutral/50'></div>
                     </li>
 

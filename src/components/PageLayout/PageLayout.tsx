@@ -8,11 +8,11 @@ interface Props {
 
 const PageLayout = (props: Props) => {
     return (
-        <div className="w-screen h-screen font-poppins bg-base100 flex">
+        <div className="md:h-screen w-screen min-h-dvh font-poppins bg-base100 flex">
             <div className="h-full">
                 <SideMenu />
             </div>
-            <div className="relative w-full flex flex-col">
+            <div className="md:overflow-y-hidden md:overflow-x-hidden relative w-full flex flex-col overflow-y-hidden overflow-x-hidden">
                 <div className="w-full absolute">
                     <LayoutHeader />
                 </div>

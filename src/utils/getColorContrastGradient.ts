@@ -41,3 +41,8 @@ export function getTextConstrastColorGradient(color1: string, color2: string): s
 
     return contrastWithBlack > contrastWithWhite && contrastWithBlack >= minimumContrast ? "#000000" : "#FFFFFF";
 }
+
+export function getInvertedColorConstrast(color1: string, color2: string) {
+    return getTextConstrastColorGradient(color1, color2) == "#000000" ? '#FFFFFF' : '#000000';
+}
+
