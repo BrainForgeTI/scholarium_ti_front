@@ -16,7 +16,7 @@ const AuthFormsInput = (props: Props) => {
             <input onChange={(event) => {
                 console.log("executou")
                 props.handleInputValue(event, props.id)
-            }} value={props.value} id={props.id} type={props.type} placeholder={props.placeholder} className="w-full h-[50px] bg-base300 border border-neutral/31 rounded-[10px] text-[15px] text-base-content px-4 py-3" />
+            }} value={props.value} id={props.id} type={props.type} placeholder={props.placeholder} className="w-full appearance-none h-[50px] bg-base300 border border-neutral/31 rounded-[10px] text-[15px] text-base-content px-4 py-3" />
         </div>
     )
 }
