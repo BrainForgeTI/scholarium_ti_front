@@ -10,7 +10,7 @@ import AuthCodeInput from "./components/AuthCodeInput";
 
 export const SignUpPage = () => {
     const [currentStep, setCurrentStep] = useState({
-        step: 3,
+        step: 0,
     });
 
     const [signUpForm, setSignUpForm] = useState<SignUpFormType>({
@@ -30,7 +30,7 @@ export const SignUpPage = () => {
         code4: '',
     });
 
-    const [timeToNextEmailCode, setToNextEmailCode] = useState(60)
+    const [timeToNextEmailCode, setTimeToNextEmailCode] = useState(60)
     const validateCodesRef: React.RefObject<HTMLInputElement | null>[] = [
         useRef<HTMLInputElement>(null),
         useRef<HTMLInputElement>(null),
@@ -176,16 +176,16 @@ export const SignUpPage = () => {
         }
     }
 
-    function checkCodesCompleted() {
-        return signUpForm.code1.length !== 0 && signUpForm.code2.length !== 0 && signUpForm.code3.length !== 0 && signUpForm.code4.length !== 0;
-    }
-
     function goToNextStep() {
-        console.log("oi")
-        const nextStep = currentStep.step + 1;
-        console.log(steps[0])
-        if (steps[currentStep.step].validStep) {
-            setCurrentStep({ step: nextStep })
+        if (currentStep.step < 3) {
+            const nextStep = currentStep.step + 1;
+            console.log(steps[0])
+            if (steps[currentStep.step].validStep) {
+                setCurrentStep({ step: nextStep })
+            }
+        } else {
+            console.log("ir validar")
+            //chamar validação de código e redirecionar para a home já com código jwt
         }
     }
 
@@ -203,6 +203,24 @@ export const SignUpPage = () => {
         return false
     }
 
+    function timeToNextCode() {
+        let codeTime = 60
+        const interval = setInterval(() => {
+            if (codeTime > 0) {
+                codeTime -= 1;
+                setTimeToNextEmailCode(codeTime);
+            } else {
+                clearInterval(interval)
+            }
+        }, 1000);
+    }
+
+    function sendOtherEmailCode() {
+        //chamar api
+        timeToNextCode();
+    }
+
+
     useEffect(() => {
         checkAndSetValidStep(0);
         checkAndSetValidStep(1);
@@ -219,6 +237,12 @@ export const SignUpPage = () => {
             hasLowercase: validator.validateHasLowercase(signUpForm.password),
         })
     }, [signUpForm.password])
+
+    useEffect(() => {
+        if (currentStep.step === 3) {
+            timeToNextCode()
+        }
+    }, [currentStep.step])
 
 
     return (
@@ -286,7 +310,7 @@ export const SignUpPage = () => {
                                 currentStep.step === 3 ?
                                     <div className="text-base-content">
                                         <h2 className="text-center text-[16px] font-medium">Código de confirmação</h2>
-                                        <p className="text-base-content/70 text-[14px] text-center mt-5">Enviamos um código de confirmação para o email informado anteriormente. Digite ocódigo abaixo para validar sua conta. Outro código poderá ser gerado após 1 minuto.</p>
+                                        <p className="text-base-content/70 text-[14px] text-center mt-5">Enviamos um código de confirmação para o email informado anteriormente. Digite o código abaixo para validar sua conta. Outro código poderá ser gerado após 1 minuto.</p>
 
                                         <div className="w-full flex justify-center gap-3 mt-8">
                                             {
@@ -313,7 +337,7 @@ export const SignUpPage = () => {
 
                                 {
                                     currentStep.step === 3 ?
-                                        <AuthSubmitButton action={() => { }} label={`Enviar outro código (${timeToNextEmailCode}s)`} disabled={timeToNextEmailCode === 0 ? true : false} styles={`${timeToNextEmailCode === 0 ? 'bg-primary/50 text-primary-content border-transparent mt-6' : 'mt-6 bg-primary/0 border-primary-content/50 text-primary-content/50'} text-[12px]`} />
+                                        <AuthSubmitButton action={sendOtherEmailCode} label={`Enviar outro código (${timeToNextEmailCode}s)`} disabled={timeToNextEmailCode === 0 ? true : false} styles={`${timeToNextEmailCode === 0 ? 'bg-primary/50 text-primary-content border-transparent mt-6' : 'mt-6 bg-primary/0 border-primary-content/50 text-primary-content/50'} text-[12px]`} />
                                         :
                                         <></>
                                 }
