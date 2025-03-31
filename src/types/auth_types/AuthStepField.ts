@@ -1,4 +1,3 @@
-import { ChangeEvent } from "react"
 import { SelectInputType } from "./SelectInputType"
 
 export type AuthStepFields = {

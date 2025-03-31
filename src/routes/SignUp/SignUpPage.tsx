@@ -1,15 +1,16 @@
 import { AuthFormsBox, PagelayoutAuth } from "../../components/PagelayoutAuth";
 import TreeTravaller from "../../assets/images/treeTravallers.png";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { SignUpFormType } from "../../types/auth_types/SignUpFormType";
 import { BackStepButton, AuthSubmitButton, AuthChooseInput, AuthPasswordStatus, AuthAcceptTermsInput } from "./index";
 import { AuthStepType } from "../../types/auth_types/AuthStepType";
 import { Validator } from "../../utils/validator";
 import { PasswordStatus } from "../../types/auth_types/PasswordStatus";
+import AuthCodeInput from "./components/AuthCodeInput";
 
 export const SignUpPage = () => {
     const [currentStep, setCurrentStep] = useState({
-        step: 2,
+        step: 3,
     });
 
     const [signUpForm, setSignUpForm] = useState<SignUpFormType>({
@@ -22,8 +23,20 @@ export const SignUpPage = () => {
         email: '',
         password: '',
         confirmPassword: '',
-        terms: false
+        terms: false,
+        code1: '',
+        code2: '',
+        code3: '',
+        code4: '',
     });
+
+    const [timeToNextEmailCode, setToNextEmailCode] = useState(60)
+    const validateCodesRef: React.RefObject<HTMLInputElement | null>[] = [
+        useRef<HTMLInputElement>(null),
+        useRef<HTMLInputElement>(null),
+        useRef<HTMLInputElement>(null),
+        useRef<HTMLInputElement>(null)
+    ]
 
 
 
@@ -71,10 +84,10 @@ export const SignUpPage = () => {
             buttonLabel: 'Validar',
             validStep: false,
             fields: [
-                { fieldId: 'code1', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'code2', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'code3', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return true } },
-                { fieldId: 'code4', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return true } }
+                { fieldId: 'code1', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return !validator.emptyString(value) } },
+                { fieldId: 'code2', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return !validator.emptyString(value) } },
+                { fieldId: 'code3', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return !validator.emptyString(value) } },
+                { fieldId: 'code4', fieldType: 'text', fieldLabel: "", fieldPlaceholder: '0', fieldValidator: (value: any) => { return !validator.emptyString(value) } }
             ]
         }
     ]);
@@ -104,6 +117,25 @@ export const SignUpPage = () => {
                 [field]: event.target.files![0]
             }));
         }
+    }
+
+    function handleCodeInput(event: ChangeEvent<HTMLInputElement>, field: string, index: number) {
+        if (signUpForm[field].length === 1 && event.target.value !== '') return
+
+        if (event.target.value === '') {
+            if (index > 0 && validateCodesRef[index - 1].current) {
+                validateCodesRef[index - 1].current?.focus();
+            }
+        } else {
+            if (index < validateCodesRef.length - 1 && validateCodesRef[index + 1].current) {
+                validateCodesRef[index + 1].current?.focus();
+            }
+        }
+
+        setSignUpForm((prev) => ({
+            ...prev,
+            [field]: event.target.value
+        }));
     }
 
     function handleCheckbox(event: React.ChangeEvent<HTMLInputElement>, field: string) {
@@ -144,6 +176,10 @@ export const SignUpPage = () => {
         }
     }
 
+    function checkCodesCompleted() {
+        return signUpForm.code1.length !== 0 && signUpForm.code2.length !== 0 && signUpForm.code3.length !== 0 && signUpForm.code4.length !== 0;
+    }
+
     function goToNextStep() {
         console.log("oi")
         const nextStep = currentStep.step + 1;
@@ -171,6 +207,7 @@ export const SignUpPage = () => {
         checkAndSetValidStep(0);
         checkAndSetValidStep(1);
         checkAndSetValidStep(2);
+        checkAndSetValidStep(3);
     }, [signUpForm])
 
     useEffect(() => {
@@ -245,6 +282,25 @@ export const SignUpPage = () => {
                                     <></>
                             }
 
+                            {
+                                currentStep.step === 3 ?
+                                    <div className="text-base-content">
+                                        <h2 className="text-center text-[16px] font-medium">Código de confirmação</h2>
+                                        <p className="text-base-content/70 text-[14px] text-center mt-5">Enviamos um código de confirmação para o email informado anteriormente. Digite ocódigo abaixo para validar sua conta. Outro código poderá ser gerado após 1 minuto.</p>
+
+                                        <div className="w-full flex justify-center gap-3 mt-8">
+                                            {
+                                                steps[3].fields.map((step, index) => {
+                                                    return <AuthCodeInput form={signUpForm} id={step.fieldId} ref={validateCodesRef[index]} step={step} value={signUpForm[step.fieldId]} index={index} handleInput={handleCodeInput} key={`code-${step.fieldId}`} />
+                                                })
+                                            }
+                                        </div>
+
+                                    </div>
+                                    :
+                                    <></>
+                            }
+
 
                             <div className="w-full mt-3">
                                 {
@@ -253,7 +309,14 @@ export const SignUpPage = () => {
                                         :
                                         <></>
                                 }
-                                <AuthSubmitButton action={goToNextStep} label={steps[currentStep.step].buttonLabel} styles={steps[currentStep.step].validStep ? 'bg-primary text-primary-content border-transparent mt-6' : 'mt-6 bg-primary/0 border-primary-content/50 text-primary-content/50'} disabled={steps[currentStep.step].validStep} />
+                                <AuthSubmitButton action={goToNextStep} label={steps[currentStep.step].buttonLabel} styles={steps[currentStep.step].validStep ? 'bg-primary text-primary-content border-transparent mt-6 text-[18px]' : 'mt-6 bg-primary/0 border-primary-content/50 text-primary-content/50 text-[18px]'} disabled={steps[currentStep.step].validStep} />
+
+                                {
+                                    currentStep.step === 3 ?
+                                        <AuthSubmitButton action={() => { }} label={`Enviar outro código (${timeToNextEmailCode}s)`} disabled={timeToNextEmailCode === 0 ? true : false} styles={`${timeToNextEmailCode === 0 ? 'bg-primary/50 text-primary-content border-transparent mt-6' : 'mt-6 bg-primary/0 border-primary-content/50 text-primary-content/50'} text-[12px]`} />
+                                        :
+                                        <></>
+                                }
                             </div>
 
                         </div>
