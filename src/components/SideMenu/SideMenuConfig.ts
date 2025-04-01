@@ -9,6 +9,7 @@ import { SideMenuRoutes } from "../../types/side_menu/SideMenuRoutes";
 
 export const sideMenuGlobalRoutes: SideMenuRoutes = {
     label: 'Quadro das Atividades',
+    type: 'global',
     routes:
         [
             { path: '/home', label: 'Minhas aventuras', icon: AdventureIcon },
@@ -21,6 +22,7 @@ export const sideMenuGlobalRoutes: SideMenuRoutes = {
 
 export const sideMenuAdventureRoutes: SideMenuRoutes = {
     label: 'Esta Aventura',
+    type: 'adventure',
     routes:
         [
             { path: '/adventure', label: 'Home', icon: HomeIcon },

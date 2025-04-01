@@ -115,5 +115,22 @@ export const useApi = () => ({
         }
 
         return response;
+    },
+
+    getAdventure: async (adventureId: string) => {
+        //mock
+        return {
+            id: 'idno2hgkgr84553h43',
+            image: 'https://res.cloudinary.com/practicaldev/image/fetch/s--qo_Wp38Z--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/e0nl7ziy1la7bpwj7rsp.png',
+            title: 'Aventura de Java',
+            colorFrom: '#86B8B9',
+            colorTo: '#26B6B8',
+            character: {
+                imageUrl: 'https://media.discordapp.net/attachments/838520690726010993/1353736029655535646/WhatsApp_Image_2025-02-23_at_14.07.16__1_-removebg-preview_2_1.png?ex=67e2bc6c&is=67e16aec&hm=279c2a0a9952b1789ace57b5ccbd28aafb362a838bcfa4d8854f0b83a4d7c9e3&=&format=webp&quality=lossless&width=84&height=88',
+                name: 'Calabreso',
+                level: 157
+            },
+            progress: 57
+        }
     }
 })

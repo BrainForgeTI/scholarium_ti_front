@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import MenuItem from "./components/MenuItem";
 import { sideMenuGlobalRoutes, sideMenuAdventureRoutes } from "./SideMenuConfig";
 import LogoSM from "../../assets/images/logo_sm.png";
@@ -12,6 +12,7 @@ export const SideMenu = () => {
     const globalRoutes = sideMenuGlobalRoutes;
     const adventureRoutes = sideMenuAdventureRoutes;
     const location = useLocation();
+    const navigation = useNavigate();
 
     const adventureContext = useContext(AdventureContext);
     const [menuActive, setMenuActive] = useState(false);
@@ -20,14 +21,22 @@ export const SideMenu = () => {
         setMenuActive(!menuActive);
     }
 
+    function navigateTo(routeType: string, path: string) {
+        if (routeType === 'global') {
+            adventureContext.setAdventure(null);
+        }
+
+        navigation(path);
+    }
+
     function renderRoutes(routes: SideMenuRoutes) {
         return routes.routes.map((route) => {
-            const routeActive = location.pathname == route.path;
+            const currentPath = location.pathname.split('/')[1];
+            const routeActive = `/${currentPath}` == route.path;
+            console.log(location.pathname.split('/'))
             return (
                 <li key={route.path}>
-                    <Link to={route.path}>
-                        <MenuItem label={route.label} icon={route.icon} active={routeActive} />
-                    </Link>
+                    <MenuItem action={() => { navigateTo(routes.type, route.path) }} label={route.label} icon={route.icon} active={routeActive} />
                 </li>
             )
         })
@@ -41,6 +50,10 @@ export const SideMenu = () => {
             html.style.overflowY = 'auto';
         }
     }, [menuActive])
+
+    useEffect(() => {
+        console.log(adventureContext.adventure)
+    }, [adventureContext.adventure])
 
     return (
         <aside className={`fixed lg:static h-full flex gap-[15px] z-50 transition-all duration-350 ${menuActive ? 'left-[0px]' : 'md:left-[-350px] left-[-300px]'}`}>

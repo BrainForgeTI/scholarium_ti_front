@@ -3,7 +3,7 @@ import { AdventureCardType } from "../../types/AdventureCardType"
 
 export type AdventureContextType = {
     adventure: AdventureCardType | null
-    setAdventure: (adventure: AdventureCardType) => void
+    setAdventure: (adventure: AdventureCardType | null) => void
     leaveAdventure: () => void
     joinAdventure: (adventure: AdventureCardType) => void
 }

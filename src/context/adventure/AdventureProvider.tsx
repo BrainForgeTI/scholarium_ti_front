@@ -9,6 +9,7 @@ export const AdventureProvider = ({ children }: { children: JSX.Element }) => {
 
     function leaveAdventure() {
         setAdventure(null);
+        navigation("/home")
     }
 
     function joinAdventure(adventure: AdventureCardType) {
@@ -17,7 +18,7 @@ export const AdventureProvider = ({ children }: { children: JSX.Element }) => {
 
     useEffect(() => {
         if (adventure) {
-            navigation("/adventure");
+            navigation(`/adventure/${adventure.id}`);
         }
     }, [adventure])
 
