@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router"
 import { HomePage } from "./routes/Home/HomePage"
 import { SignUpPage } from "./routes/SignUp/SignUpPage"
-import { AdventurePage } from "./routes/Adventure/AdventurePage"
+import { AdventurePage } from "./routes/Adventure"
 import { AdventureAuth } from "./context/adventure/AdventureAuth"
 
 function App() {
