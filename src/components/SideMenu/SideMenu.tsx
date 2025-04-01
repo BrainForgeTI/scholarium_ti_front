@@ -1,19 +1,36 @@
 import { Link, useLocation } from "react-router";
 import MenuItem from "./components/MenuItem";
-import { sideMenuGlobalRoutes } from "./SideMenuConfig";
+import { sideMenuGlobalRoutes, sideMenuAdventureRoutes } from "./SideMenuConfig";
 import LogoSM from "../../assets/images/logo_sm.png";
 import MenuIcon from "../../assets/icons/menu.svg";
 import GoldImg from "../../assets/images/gold.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AdventureContext } from "../../context/adventure/AdventureContext";
+import { SideMenuRoutes } from "../../types/side_menu/SideMenuRoutes";
 
 export const SideMenu = () => {
     const globalRoutes = sideMenuGlobalRoutes;
+    const adventureRoutes = sideMenuAdventureRoutes;
     const location = useLocation();
 
+    const adventureContext = useContext(AdventureContext);
     const [menuActive, setMenuActive] = useState(false);
 
     function toggleMenu() {
         setMenuActive(!menuActive);
+    }
+
+    function renderRoutes(routes: SideMenuRoutes) {
+        return routes.routes.map((route) => {
+            const routeActive = location.pathname == route.path;
+            return (
+                <li key={route.path}>
+                    <Link to={route.path}>
+                        <MenuItem label={route.label} icon={route.icon} active={routeActive} />
+                    </Link>
+                </li>
+            )
+        })
     }
 
     useEffect(() => {
@@ -32,20 +49,24 @@ export const SideMenu = () => {
                     <img src={LogoSM}></img>
                     <span className="uppercase">Scholarium</span>
                 </div>
-                <nav className="w-full pt-10">
-                    <div className="text-base-content/54 uppercase text-[15px] ps-3 pb-2 font-semibold">{globalRoutes.label}</div>
-                    <ul className="w-full flex flex-col gap-4">
-                        {globalRoutes.routes.map((route) => {
-                            const routeActive = location.pathname == route.path;
-                            return (
-                                <li key={route.path}>
-                                    <Link to={route.path}>
-                                        <MenuItem label={route.label} icon={route.icon} active={routeActive} />
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
+                <nav className="w-full pt-10 flex flex-col gap-6">
+                    {
+                        adventureContext.adventure ?
+                            <div>
+                                <div className="text-base-content/54 uppercase text-[15px] ps-3 pb-2 font-semibold">{adventureRoutes.label}</div>
+                                <ul className="w-full flex flex-col gap-4">
+                                    {renderRoutes(adventureRoutes)}
+                                </ul>
+                            </div>
+                            :
+                            ''
+                    }
+                    <div className="w-full">
+                        <div className="text-base-content/54 uppercase text-[15px] ps-3 pb-2 font-semibold">{globalRoutes.label}</div>
+                        <ul className="w-full flex flex-col gap-4">
+                            {renderRoutes(globalRoutes)}
+                        </ul>
+                    </div>
                 </nav>
 
                 <div className="lg:hidden w-full border border-base-content/20 rounded-[15px] p-2 mt-10 ">
