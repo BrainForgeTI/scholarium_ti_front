@@ -13,7 +13,7 @@ const AdventureNotice = () => {
         },
         {
             label: 'Criar Capítulos',
-            visible: true // mudar isso aqui para deixar dinâmico
+            visible: adventureContext.adventure && adventureContext.adventure.chapters.length === 0
         }
     ]
 
@@ -27,7 +27,7 @@ const AdventureNotice = () => {
             </div>
 
             <p className='text-[20px] md:text-[24px] font-medium max-w-[540px] text-center text-base-content/62'>
-                Você precisa criar os Capítulos e o Personagem da sua aventura
+                Você precisa realizar os seguinte passos para iniciar sua aventura:
             </p>
 
             <div className='w-full flex flex-col items-center gap-5'>

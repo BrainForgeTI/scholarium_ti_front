@@ -15,7 +15,8 @@ export const useApi = () => ({
                     name: 'Marcão',
                     level: 50
                 },
-                progress: 57
+                progress: 57,
+                chapters: []
             },
 
             {
@@ -29,7 +30,8 @@ export const useApi = () => ({
                     name: 'Calabreso',
                     level: 157
                 },
-                progress: 57
+                progress: 57,
+                chapters: []
             },
             {
                 id: 'idnojj2287424hr83h43',
@@ -42,7 +44,8 @@ export const useApi = () => ({
                     name: 'Calabreso',
                     level: 157
                 },
-                progress: 57
+                progress: 57,
+                chapters: []
             },
             {
                 id: 'id28-323no2hr83h43',
@@ -55,7 +58,8 @@ export const useApi = () => ({
                     name: 'Calabreso',
                     level: 157
                 },
-                progress: 57
+                progress: 57,
+                chapters: []
             },
             {
                 id: 'id7tno2hr84553h43',
@@ -68,7 +72,8 @@ export const useApi = () => ({
                     name: 'Calabreso',
                     level: 157
                 },
-                progress: 57
+                progress: 57,
+                chapters: []
             },
             {
                 id: 'idno2hr84557ti3h43',
@@ -81,7 +86,8 @@ export const useApi = () => ({
                     name: 'Calabreso',
                     level: 157
                 },
-                progress: 57
+                progress: 57,
+                chapters: []
             },
             {
                 id: 'idno2hgkgr84553h43',
@@ -94,7 +100,8 @@ export const useApi = () => ({
                     name: 'Calabreso',
                     level: 157
                 },
-                progress: 57
+                progress: 57,
+                chapters: []
             },
         ]
 
@@ -131,13 +138,17 @@ export const useApi = () => ({
             //     level: 157
             // },
             // progress: 57
+
+
+
             id: 'idno2hgkgr84553h43',
             image: 'https://res.cloudinary.com/practicaldev/image/fetch/s--qo_Wp38Z--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/e0nl7ziy1la7bpwj7rsp.png',
             title: 'Aventura de Java',
             colorFrom: '#86B8B9',
             colorTo: '#26B6B8',
             character: null,
-            progress: 57
+            progress: 57,
+            chapters: []
         }
     }
 })

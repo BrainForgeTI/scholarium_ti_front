@@ -9,23 +9,43 @@ export const AdventureAuth = ({ children }: { children: JSX.Element }) => {
     const navigation = useNavigate();
     const api = useApi();
 
+    // async function authenticateAdventure() {
+    //     if (!adventureContext.adventure) {
+    //         if (id) {
+    //             const adventure: AdventureCardType | null = await api.getAdventure(id);
+    //             if (adventure) {
+    //                 adventureContext.setAdventure(adventure);
+    //                 return;
+    //             }
+    //         }
+
+    //         navigation('/home');
+    //     }
+    // }
+
     async function authenticateAdventure() {
-        if (!adventureContext.adventure) {
-            if (id) {
-                const adventure = await api.getAdventure(id);
+        console.log("uma vez")
+        if (!id) {
+            navigation('/home')
+            return
+        } else {
+            if (!adventureContext.adventure) {
+                const adventure = await api.getAdventure(id)
                 if (adventure) {
-                    adventureContext.setAdventure(adventure);
-                    return;
+                    setTimeout(() => {
+                        adventureContext.setAdventure(adventure);
+                    }, 1000)
+                } else {
+                    navigation("/home");
                 }
             }
-
-            navigation('/home');
         }
     }
 
     useEffect(() => {
-        authenticateAdventure();
+        authenticateAdventure()
     }, [])
+
 
     return children;
 }

@@ -12,7 +12,7 @@ const AdventurePage = () => {
     })
 
     return (
-        <PageLayout>
+        <PageLayout awaitAdventureLoad={true}>
             <div className="w-full">
                 <div className="w-full h-full flex justify-center items-center">
                     <AdventureNotice></AdventureNotice>

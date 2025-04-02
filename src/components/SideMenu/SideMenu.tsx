@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import MenuItem from "./components/MenuItem";
 import { sideMenuGlobalRoutes, sideMenuAdventureRoutes } from "./SideMenuConfig";
 import LogoSM from "../../assets/images/logo_sm.png";
@@ -11,6 +11,7 @@ import { SideMenuRoutes } from "../../types/side_menu/SideMenuRoutes";
 export const SideMenu = () => {
     const globalRoutes = sideMenuGlobalRoutes;
     const adventureRoutes = sideMenuAdventureRoutes;
+    const { id } = useParams<{ id: string }>();
     const location = useLocation();
     const navigation = useNavigate();
 
@@ -24,9 +25,11 @@ export const SideMenu = () => {
     function navigateTo(routeType: string, path: string) {
         if (routeType === 'global') {
             adventureContext.setAdventure(null);
+            navigation(path);
+        } else {
+            navigation(`${path}${id ? `/${id}` : ''}`);
         }
 
-        navigation(path);
     }
 
     function renderRoutes(routes: SideMenuRoutes) {
@@ -51,10 +54,6 @@ export const SideMenu = () => {
         }
     }, [menuActive])
 
-    useEffect(() => {
-        console.log(adventureContext.adventure)
-    }, [adventureContext.adventure])
-
     return (
         <aside className={`fixed lg:static h-full flex gap-[15px] z-50 transition-all duration-350 ${menuActive ? 'left-[0px]' : 'md:left-[-350px] left-[-300px]'}`}>
             <div className="md:w-[350px] bg-base200 w-[300px] h-full flex p-4 flex-col items-center border-e border-base-content/20 overflow-y-auto">
@@ -64,7 +63,7 @@ export const SideMenu = () => {
                 </div>
                 <nav className="w-full pt-10 flex flex-col gap-6">
                     {
-                        adventureContext.adventure ?
+                        id ?
                             <div>
                                 <div className="text-base-content/54 uppercase text-[15px] ps-3 pb-2 font-semibold">{adventureRoutes.label}</div>
                                 <ul className="w-full flex flex-col gap-4">
