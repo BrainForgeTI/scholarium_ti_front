@@ -33,7 +33,6 @@ export const HomePage = () => {
 
     async function createAdventure() {
         let newObjectAdventure = { ...newAdventure }
-        console.log(newObjectAdventure)
         let adventuresTemp = adventures.slice();
         adventuresTemp.push(newObjectAdventure);
         setAdventures(adventuresTemp)
@@ -42,8 +41,6 @@ export const HomePage = () => {
         setNewAdventure({ id: 'newTemp', title: 'Nova Aventura', progress: 0, image: '', character: null, colorFrom: '#000000', colorTo: '#FFFFFF', chapters: [] })
 
         const response = await api.createAdventure('j2f942', newObjectAdventure);
-
-        console.log(response)
 
         if (response.status !== 201) {
             setTimeout(() => {

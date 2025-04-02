@@ -9,22 +9,7 @@ export const AdventureAuth = ({ children }: { children: JSX.Element }) => {
     const navigation = useNavigate();
     const api = useApi();
 
-    // async function authenticateAdventure() {
-    //     if (!adventureContext.adventure) {
-    //         if (id) {
-    //             const adventure: AdventureCardType | null = await api.getAdventure(id);
-    //             if (adventure) {
-    //                 adventureContext.setAdventure(adventure);
-    //                 return;
-    //             }
-    //         }
-
-    //         navigation('/home');
-    //     }
-    // }
-
     async function authenticateAdventure() {
-        console.log("uma vez")
         if (!id) {
             navigation('/home')
             return

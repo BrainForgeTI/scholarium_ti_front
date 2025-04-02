@@ -7,10 +7,6 @@ import { AdventureNotice } from './index'
 const AdventurePage = () => {
     const adventureContext = useContext(AdventureContext);
 
-    useEffect(() => {
-        console.log(adventureContext.adventure)
-    })
-
     return (
         <PageLayout awaitAdventureLoad={true}>
             <div className="w-full">

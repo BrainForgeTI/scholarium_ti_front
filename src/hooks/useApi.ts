@@ -113,7 +113,6 @@ export const useApi = () => ({
         //mock
         let random = Math.floor(Math.random() * 10)
         let response;
-        console.log(random)
 
         if (random > 4) {
             response = { status: 201, cardId: `fjmwpijg39j3r-${Math.random() * 50000}` }

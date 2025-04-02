@@ -36,7 +36,6 @@ export const SideMenu = () => {
         return routes.routes.map((route) => {
             const currentPath = location.pathname.split('/')[1];
             const routeActive = `/${currentPath}` == route.path;
-            console.log(location.pathname.split('/'))
             return (
                 <li key={route.path}>
                     <MenuItem action={() => { navigateTo(routes.type, route.path) }} label={route.label} icon={route.icon} active={routeActive} />
