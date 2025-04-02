@@ -39,8 +39,6 @@ export const HomePage = () => {
 
         const response = await api.createAdventure('j2f942', newObjectAdventure);
 
-        console.log(response)
-
         if (response.status !== 201) {
             setTimeout(() => {
                 setAdventures((prev) => prev.slice(0, -1));
