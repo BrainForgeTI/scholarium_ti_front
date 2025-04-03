@@ -48,7 +48,7 @@ const ChapterSection = (props: Props) => {
                         })}
                     </div>
                     <div className="w-full border min-h-60 border-neutral/18 rounded-[10px]">
-                        <textarea ref={textAreaRef} className="p-6 text-base-content/70 outline-none w-full h-full text-[16px]"></textarea>
+                        <textarea ref={textAreaRef} placeholder="Anotações..." className="resize-none p-6 text-base-content/70 outline-none w-full h-full text-[16px]"></textarea>
                     </div>
                 </div>
             </div>

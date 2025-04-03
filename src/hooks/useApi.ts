@@ -157,27 +157,27 @@ export const useApi = () => ({
                         {
                             id: '3j54prij',
                             completed: true,
-                            name: 'Estudar o básico'
+                            name: 'Entender qual a necessidade de uilizar React Hooks'
                         },
                         {
                             id: '3423432543',
                             completed: true,
-                            name: 'Estudar o básico'
+                            name: 'Pesquisar em qual contexto esse hook é utilizado'
                         },
                         {
                             id: '3j243243prij',
                             completed: true,
-                            name: 'Estudar o básico'
+                            name: 'Verificar se é possível fazer miojo utilizando hooks'
                         },
                         {
                             id: '3jp2354rij',
                             completed: false,
-                            name: 'Estudar o básico'
+                            name: 'Realizar um projeto prático utilizando hooks de forma diversa'
                         },
                         {
                             id: '3j23p3534rij',
                             completed: false,
-                            name: 'Estudar o básico'
+                            name: 'Avaliar o funcionamento e enxergar melhorias e boas práticas'
                         }
                     ]
                 },
