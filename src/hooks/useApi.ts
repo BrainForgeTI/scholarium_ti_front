@@ -147,7 +147,87 @@ export const useApi = () => ({
             colorTo: '#26B6B8',
             character: null,
             progress: 57,
-            chapters: []
+            chapters: [
+                {
+                    id: 'r333rwf',
+                    expanded: true,
+                    notes: 'fdsafaç~mfa fam fçsm fçsm sçma fsm af',
+                    title: 'React Hooks',
+                    topics: [
+                        {
+                            id: '3j54prij',
+                            completed: true,
+                            name: 'Estudar o básico'
+                        },
+                        {
+                            id: '3423432543',
+                            completed: true,
+                            name: 'Estudar o básico'
+                        },
+                        {
+                            id: '3j243243prij',
+                            completed: true,
+                            name: 'Estudar o básico'
+                        },
+                        {
+                            id: '3jp2354rij',
+                            completed: false,
+                            name: 'Estudar o básico'
+                        },
+                        {
+                            id: '3j23p3534rij',
+                            completed: false,
+                            name: 'Estudar o básico'
+                        }
+                    ]
+                },
+                {
+                    id: 'rçwijf3',
+                    expanded: false,
+                    notes: 'fdsafaç~mfa fam fçsm fçsm sçma fsm af',
+                    title: 'React Hooks',
+                    topics: [
+                        {
+                            id: '3jprij',
+                            completed: true,
+                            name: 'Estudar o básico'
+                        },
+                        {
+                            id: '3423543',
+                            completed: false,
+                            name: 'Estudar o básico'
+                        },
+                        {
+                            id: '3j243prij',
+                            completed: true,
+                            name: 'Estudar o básico'
+                        },
+                        {
+                            id: '3jp54rij',
+                            completed: false,
+                            name: 'Estudar o básico'
+                        },
+                        {
+                            id: '3jp3534rij',
+                            completed: false,
+                            name: 'Estudar o básico'
+                        }
+                    ]
+                }
+            ]
         }
+    },
+
+    changeChapterTopicCompleted: async () => {
+        let random = Math.floor(Math.random() * 10)
+        let response;
+
+        if (random > 4) {
+            response = { status: 200 }
+        } else {
+            response = { status: 500 }
+        }
+
+        return response
     }
 })

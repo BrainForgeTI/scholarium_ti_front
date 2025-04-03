@@ -1,7 +1,9 @@
-import { Topic } from "./TopicType"
+import { TopicType } from "./TopicType"
 
 export type ChapterType = {
+    id: string
     title: string
-    topics: Topic[]
+    expanded: boolean
+    topics: TopicType[]
     notes: string
 }
