@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from "react";
 import ActionButton from "../../components/ActionButton/ActionButton";
 import { PageLayout, PageTitle } from "../../components/PageLayout"
-import { SearchInput } from './index';
+import { ChapterSection, SearchInput } from './index';
 import EditIcon from '../../assets/icons/edit.svg';
 
 const MyAdventurePage = () => {
@@ -32,6 +32,10 @@ const MyAdventurePage = () => {
                     <div className="min-w-[137px] text ">
                         <ActionButton Icon={EditIcon} action={() => { }} label="Editar" style="bg-action-prev/11 border border-action-prev/89 gap-5 text-action-prev-content" />
                     </div>
+                </div>
+
+                <div className="w-full mt-10">
+                    <ChapterSection index="1" title="React Hooks" />
                 </div>
             </div>
         </PageLayout>
