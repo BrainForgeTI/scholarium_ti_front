@@ -39,7 +39,7 @@ const AdventureNotice = () => {
                             return (
                                 <div key={`notice-${index}]`} className='w-full md:w-[377px] flex gap-4 items-center'>
                                     <span className='hidden md:block text-[40px] font-bold text-base-content/25 w-[50px]'>{`${buttonCount}.`}</span>
-                                    <ActionButton label={`${item.label}`} />
+                                    <ActionButton action={() => { }} label={`${item.label}`} style='bg-primary text-primary-content' />
                                 </div>
                             )
                         }

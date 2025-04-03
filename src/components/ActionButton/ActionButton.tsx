@@ -1,9 +1,7 @@
-import { JSX } from "react"
-
 interface Props {
     label: string
     action: () => void
-    style: string
+    style?: string
     Icon?: any
 }
 
