@@ -13,14 +13,19 @@ interface Props {
 
 const ChapterSection = (props: Props) => {
     const topicContainerRef = useRef<HTMLDivElement>(null);
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const [height, setHeight] = useState(0);
 
-    useEffect(() => {
+    function updateDivHeight() {
         if (props.chapter.expanded && topicContainerRef.current) {
             setHeight(topicContainerRef.current.scrollHeight);
         } else {
             setHeight(0);
         }
+    }
+
+    useEffect(() => {
+        updateDivHeight();
     }, [props.chapter.expanded])
 
     return (
@@ -35,11 +40,16 @@ const ChapterSection = (props: Props) => {
                 }
             </div>
 
-            <div ref={topicContainerRef} className={`ps-20 w-full mt-[63px] h-60 transition-all duration-300 overflow-y-hidden`} style={{ maxHeight: `${height}px` }}>
-                <div className="mt-5 flex flex-col gap-5">
-                    {props.chapter.topics.map((topic) => {
-                        return <AdventureTopic chapterId={props.chapter.id} handleChapterTopicCompleted={props.handleChapterTopicCompleted} topic={topic} />
-                    })}
+            <div ref={topicContainerRef} className={`ps-20 w-full mt-[63px] transition-all duration-300 overflow-y-hidden`} style={{ maxHeight: `${height}px` }}>
+                <div className="mt-5 grid grid-cols-2">
+                    <div className="flex flex-col gap-5">
+                        {props.chapter.topics.map((topic) => {
+                            return <AdventureTopic chapterId={props.chapter.id} handleChapterTopicCompleted={props.handleChapterTopicCompleted} topic={topic} />
+                        })}
+                    </div>
+                    <div className="w-full border min-h-60 border-neutral/18 rounded-[10px]">
+                        <textarea ref={textAreaRef} className="p-6 text-base-content/70 outline-none w-full h-full text-[16px]"></textarea>
+                    </div>
                 </div>
             </div>
         </div>

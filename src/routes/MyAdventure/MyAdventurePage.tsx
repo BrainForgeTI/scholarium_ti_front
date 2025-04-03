@@ -103,10 +103,6 @@ const MyAdventurePage = () => {
                         <SearchInput value={searchValue} handleInput={handleSearchValue} placeholder="Buscar capítulo..." />
                     </div>
 
-                    <div className="min-w-[137px]">
-                        <ActionButton action={() => { }} label="Ver anotações" style="bg-neutral/11 text-neutral text-[14px]" />
-                    </div>
-
                     <div className="min-w-[137px] text ">
                         <ActionButton Icon={EditIcon} action={() => { }} label="Editar" style="bg-action-prev/11 border border-action-prev/89 gap-5 text-action-prev-content" />
                     </div>
