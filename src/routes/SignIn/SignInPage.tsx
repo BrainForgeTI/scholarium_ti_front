@@ -3,6 +3,8 @@ import Castle from "../../assets/images/castle.png";
 import { useEffect, useState } from "react";
 import { AuthStepFields } from "../../types/auth_types/AuthStepField";
 import { ChangeEvent } from "react"
+import { Link } from "react-router";
+import { NavLink } from "react-router";
 
 export const SignInPage = () => {
     const [loginForm,setLoginForm] = useState({
@@ -42,8 +44,8 @@ export const SignInPage = () => {
     return (<div>
     
             <PagelayoutAuth right={false} pageText={<p className="text-xl lg:w-[300px] xl:w-auto 2xl:w-auto text-end "> Aprenda, <span className="text-3xl 2xl:text-4xl text-primary font-bold">CONQUISTE,</span> evolua </p>} pageImage={Castle} imageAlt="Um castelo iluminado">
-                <div className="w-full flex justify-end">
-                    <div className="w-[320px] lg:w-[384px] flex lg:block justify-center">
+                <div className="w-full flex justify-center lg:justify-end">
+                    <div className="w-[320px] lg:w-[384px] lg:block justify-center">
                         <p className="flex justify-center w-full p-[20px] text-white text-[20px]">Entre no Scholarium</p>
                         <AuthFormsBox>
                             <div className="w-full flex flex-col gap-5">
@@ -56,7 +58,7 @@ export const SignInPage = () => {
                         </AuthFormsBox>
                         <div className="flex flex-col w-full mt-6 p-[15px] rounded-[20px] text-white justify-items-center text-center bg-neutral/5">
                             <p>Ainda não tem uma conta?</p>
-                            <a className="flex text-blue-400 underline text-center justify-center" href="http://localhost:5173/signup">Crie gratuitamente aqui</a>
+                            <NavLink className="flex text-blue-400 underline text-center justify-center" to="/signup">Crie gratuitamente aqui</NavLink>
                         </div>
                     </div>
                 </div>
