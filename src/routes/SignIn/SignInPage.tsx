@@ -41,18 +41,22 @@ export const SignInPage = () => {
     },[loginForm])
     return (<div>
     
-            <PagelayoutAuth right={false} pageText={<p className="text-xl lg:w-[300px] xl:w-auto 2xl:w-auto text-end"> Aprenda, <span className="text-3xl 2xl:text-4xl text-primary font-bold">CONQUISTE,</span> evolua </p>} pageImage={Castle} imageAlt="Um castelo iluminado">
+            <PagelayoutAuth right={false} pageText={<p className="text-xl lg:w-[300px] xl:w-auto 2xl:w-auto text-end "> Aprenda, <span className="text-3xl 2xl:text-4xl text-primary font-bold">CONQUISTE,</span> evolua </p>} pageImage={Castle} imageAlt="Um castelo iluminado">
                 <div className="w-full flex justify-end">
                     <div className="w-[320px] lg:w-[384px] flex lg:block justify-center">
+                        <p className="flex justify-center w-full p-[20px] text-white text-[20px]">Entre no Scholarium</p>
                         <AuthFormsBox>
                             <div className="w-full flex flex-col gap-5">
                                 <AuthFormsInput type={emailValue.fieldType} id={emailValue.fieldId} label={emailValue.fieldLabel} placeholder={emailValue.fieldPlaceholder} value={loginForm.email} handleInputValue={handleInputValue}></AuthFormsInput>
                                 <AuthFormsInput type={senhaValue.fieldType} id={senhaValue.fieldId} label={senhaValue.fieldLabel} placeholder={senhaValue.fieldPlaceholder} value={loginForm.password} handleInputValue={handleInputValue}></AuthFormsInput>
+                                <button className="text-white w-full p-[10px] bg-primary rounded-lg cursor-pointer">Entrar</button>
+                                <p className="flex justify-center w-full text-white text-[12px]">Esqueceu a senha?<a className="flex ml-2 text-blue-400 underline" href="">clique aqui</a></p>
                             </div>
+                            
                         </AuthFormsBox>
-                        <div className="border border-white">
-                            <p>Qualquer coisa</p>
-                            <p></p>
+                        <div className="flex flex-col w-full mt-6 p-[15px] rounded-[20px] text-white justify-items-center text-center bg-neutral/5">
+                            <p>Ainda não tem uma conta?</p>
+                            <a className="flex text-blue-400 underline text-center justify-center" href="http://localhost:5173/signup">Crie gratuitamente aqui</a>
                         </div>
                     </div>
                 </div>
